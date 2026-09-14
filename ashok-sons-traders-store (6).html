@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com; connect-src 'self' https://firestore.googleapis.com https://www.googleapis.com https://*.firebaseio.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Ashok & Son's Traders — Furniture, Electronics & Home Appliances</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --espresso:#2B2117; --espresso-2:#3B2F22; --cream:#F6EFE3; --cream-2:#EDE2CE;
+    --brass:#B8863B; --brass-light:#D9AE6A; --rust:#A63D2F; --ink:#221A12; --paper:#FBF7EF;
+    --line: rgba(43,33,23,0.14); --radius: 4px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Manrope', sans-serif; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.display{font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em; margin:0; color:var(--espresso);}
+  p{line-height:1.65; color:#4A3F30; margin:0;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+
+  header{position:sticky; top:0; z-index:50; background:rgba(251,247,239,0.92); backdrop-filter: blur(8px); border-bottom:1px solid var(--line);}
+  .nav-row{display:flex; align-items:center; justify-content:space-between; padding:18px 28px; max-width:1180px; margin:0 auto; gap:14px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{width:42px; height:42px; border-radius:50%; background:var(--espresso); display:flex; align-items:center; justify-content:center; color:var(--brass-light); font-family:'Fraunces',serif; font-weight:700; font-size:18px;}
+  .brand-name{font-family:'Fraunces', serif; font-size:19px; font-weight:600; color:var(--espresso); line-height:1.1;}
+  .brand-tag{font-size:11px; color:#8A5A1E; font-weight:800; letter-spacing:.05em; text-transform:uppercase;}
+  nav.links{display:flex; gap:28px; font-size:14.5px; font-weight:600; color:var(--espresso-2);}
+  nav.links a{padding:6px 0; border-bottom:2px solid transparent; transition:border-color .2s;}
+  nav.links a:hover{border-color:var(--brass);}
+  .nav-actions{display:flex; align-items:center; gap:12px;}
+  .lang-switch{display:flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; background:var(--cream);}
+  .lang-btn{padding:8px 14px; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--espresso-2); background:transparent; border:none;}
+  .lang-btn.active{background:var(--espresso); color:var(--cream);}
+  .icon-btn{position:relative; width:40px; height:40px; border-radius:50%; border:1px solid var(--line); background:var(--cream); display:flex; align-items:center; justify-content:center; cursor:pointer;}
+  .cart-count{position:absolute; top:-4px; right:-4px; background:var(--rust); color:#fff; font-size:10.5px; font-weight:700; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center;}
+  .call-btn{background:var(--espresso); color:var(--cream); padding:10px 18px; border-radius:999px; font-size:13.5px; font-weight:700; display:flex; align-items:center; gap:8px; white-space:nowrap;}
+
+  .hero{position:relative; overflow:hidden; background: radial-gradient(ellipse 900px 500px at 85% -10%, rgba(184,134,59,0.22), transparent 60%), var(--espresso); color:var(--cream);}
+  .hero-grid{max-width:1180px; margin:0 auto; padding:84px 28px 70px; display:grid; grid-template-columns:1.1fr 0.9fr; gap:50px; align-items:center;}
+  .eyebrow-row{display:flex; align-items:center; gap:10px; margin-bottom:22px;}
+  .eyebrow-row .dot{width:7px;height:7px;border-radius:50%;background:var(--brass-light);}
+  .eyebrow-row span{font-size:13px; color:#FBD98A; font-weight:800; letter-spacing:.06em; text-transform:uppercase;}
+  .hero h1{font-size:clamp(34px, 5vw, 56px); line-height:1.08; color:#FBF3E4; max-width:14ch;}
+  .hero-sub{margin-top:22px; max-width:46ch; color:#D9C9AE; font-size:16px;}
+  .hero-stats{display:flex; gap:36px; margin-top:38px;}
+  .hero-stats .stat{min-width:118px;}
+  .hero-stats .stat b{display:block; font-family:'Fraunces',serif; font-size:26px; line-height:1.2; color:var(--brass-light);}
+  .hero-stats .stat span{font-size:12.5px; color:#B8A688; display:block; margin-top:2px;}
+  .hero-cta{display:flex; gap:14px; margin-top:38px; flex-wrap:wrap;}
+  .btn-primary{background:var(--brass-light); color:var(--espresso); padding:14px 26px; border-radius:2px; font-weight:700; font-size:14.5px; border:none; cursor:pointer;}
+  .btn-ghost{border:1px solid rgba(246,239,227,0.35); color:var(--cream); padding:14px 26px; border-radius:2px; font-weight:700; font-size:14.5px; background:transparent; cursor:pointer;}
+  .hero-visual{position:relative; aspect-ratio:1/1.05; border-radius:6px; overflow:hidden; background:linear-gradient(155deg, #4A3B29, #2B2117 65%); border:1px solid rgba(217,174,106,0.25);}
+  .hero-visual .frame{position:absolute; inset:22px; border:1px solid rgba(217,174,106,0.35); border-radius:4px;}
+  .hero-visual .cardfloat{position:absolute; left:28px; bottom:28px; background:var(--paper); color:var(--ink); padding:16px 18px; border-radius:4px; width:198px; box-shadow:0 20px 40px rgba(0,0,0,0.35);}
+  .hero-visual .cardfloat .label{font-size:11px; color:var(--rust); font-weight:700; letter-spacing:.02em;}
+  .hero-visual .cardfloat .name{font-family:'Fraunces',serif; font-size:16.5px; margin-top:4px;}
+  .hero-visual .cardfloat .price{font-size:13.5px; color:var(--brass); font-weight:700; margin-top:6px;}
+  .hero-visual .glyph{position:absolute; top:26px; right:26px; width:64px; height:64px; opacity:.5;}
+
+  .ad-banner-wrap{max-width:1180px; margin:34px auto 0; padding:0 28px;}
+  .ad-banner{position:relative; border-radius:14px; overflow:hidden; aspect-ratio:16/5; background:linear-gradient(155deg,var(--cream-2),#fff); box-shadow:0 18px 40px rgba(43,33,23,0.14);}
+  .ad-slide{position:absolute; inset:0; opacity:0; transition:opacity .7s ease; display:flex; align-items:flex-end;}
+  .ad-slide.active{opacity:1;}
+  .ad-slide img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .ad-slide .ad-scrim{position:absolute; inset:0; background:linear-gradient(0deg, rgba(20,14,8,0.78) 0%, rgba(20,14,8,0.15) 55%, transparent 100%);}
+  .ad-slide .ad-text{position:relative; z-index:2; padding:22px 30px; color:#FBF3E4;}
+  .ad-slide .ad-cat{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--brass-light); font-weight:700;}
+  .ad-slide .ad-title{font-family:'Fraunces',serif; font-size:clamp(18px,2.6vw,28px); font-weight:700; margin-top:4px;}
+  .ad-slide .ad-sub{font-size:13px; color:#E8DBC3; margin-top:4px;}
+  .ad-slide .ad-rate{display:inline-block; margin-top:8px; background:var(--rust); color:#fff; font-weight:800; font-size:13px; padding:5px 12px; border-radius:999px;}
+  .ad-dots{position:absolute; bottom:14px; right:20px; z-index:3; display:flex; gap:6px;}
+  .ad-dot{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.45); cursor:pointer; border:none; padding:0;}
+  .ad-dot.active{background:#fff;}
+  @media(max-width:640px){ .ad-banner{aspect-ratio:4/3;} }
+  .trust-strip{background:var(--cream-2); border-bottom:1px solid var(--line);}
+  .trust-row{max-width:1180px; margin:0 auto; padding:20px 28px; display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .trust-item{
+    display:flex; align-items:center; gap:10px; font-size:13px; font-weight:700; color:var(--espresso);
+    background:#fff; border:1px solid var(--line); border-radius:10px; padding:12px 14px;
+    box-shadow:0 2px 6px rgba(43,33,23,0.04);
+  }
+  .trust-item .tick{
+    flex-shrink:0; width:24px; height:24px; border-radius:50%; background:var(--green,#2F6B4F); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;
+  }
+  @media(max-width:900px){ .trust-row{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:560px){ .trust-row{grid-template-columns:1fr; padding:16px 18px;} }
+
+  .section{padding:76px 0;}
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; gap:20px; flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(24px,3vw,34px);}
+  .section-head p{max-width:40ch; margin-top:10px;}
+  .section-num{font-family:'Fraunces',serif; color:#8A5A1E; font-size:14px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; margin-bottom:8px; display:block;}
+
+  .cat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .cat-card{border:1px solid var(--line); border-radius:4px; padding:30px 26px; background:#fff; transition:transform .25s, box-shadow .25s; cursor:pointer;}
+  .cat-card:hover{transform:translateY(-4px); box-shadow:0 18px 34px rgba(43,33,23,0.1);}
+  .cat-icon{width:46px; height:46px; border-radius:50%; background:var(--cream-2); display:flex; align-items:center; justify-content:center; margin-bottom:18px;}
+  .cat-card h3{font-size:20px; margin-bottom:8px;}
+  .cat-card p{font-size:13.5px;}
+  .cat-count{margin-top:16px; font-size:12.5px; color:#8A5A1E; font-weight:800;}
+
+  .prod-tabs{display:flex; gap:10px; margin-bottom:34px; flex-wrap:wrap;}
+  .prod-tab{padding:9px 18px; border-radius:999px; border:1px solid var(--line); font-size:13px; font-weight:700; color:var(--espresso-2); cursor:pointer; background:#fff;}
+  .prod-tab.active{background:var(--espresso); color:var(--cream); border-color:var(--espresso);}
+  .sub-tab{padding:6px 14px; font-size:12px;}
+  .spin-badge{position:absolute; top:10px; right:10px; background:rgba(34,26,18,0.8); color:#fff; font-size:11px; font-weight:700; padding:4px 9px; border-radius:999px; z-index:2;}
+  .prod-img{position:relative;}
+
+  .pmodal-overlay{display:none; position:fixed; inset:0; background:rgba(20,14,8,0.6); z-index:200; align-items:center; justify-content:center; padding:20px;}
+  .pmodal-overlay.show{display:flex;}
+  .pmodal{background:#fff; border-radius:10px; max-width:720px; width:100%; max-height:90vh; overflow-y:auto; padding:24px; position:relative;}
+  .pmodal-close{position:absolute; top:14px; right:14px; width:32px; height:32px; border-radius:50%; border:none; background:var(--cream-2); font-size:16px; cursor:pointer;}
+  .pmodal-main{width:100%; aspect-ratio:4/3; border-radius:8px; overflow:hidden; background:var(--cream-2); display:flex; align-items:center; justify-content:center; position:relative; touch-action:none;}
+  .pmodal-main img{width:100%; height:100%; object-fit:cover; user-select:none; -webkit-user-drag:none;}
+  .pmodal-thumbs{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;}
+  .pmodal-thumb{width:56px; height:56px; border-radius:6px; overflow:hidden; border:2px solid transparent; cursor:pointer;}
+  .pmodal-thumb.active{border-color:var(--rust);}
+  .pmodal-thumb img{width:100%; height:100%; object-fit:cover;}
+  .pmodal-spin-btn{margin-top:14px; padding:9px 16px; border-radius:999px; border:1px solid var(--line); background:#fff; font-weight:700; font-size:13px; cursor:pointer;}
+  .pmodal-spin-btn.active{background:var(--espresso); color:#fff; border-color:var(--espresso);}
+  .spin-hint{font-size:11.5px; color:var(--muted); text-align:center; margin-top:8px;}
+  .pmodal-name{font-size:20px; font-weight:800; margin-top:16px;}
+  .pmodal-price{font-size:20px; font-weight:800; color:var(--rust); margin:6px 0 16px;}
+  .prod-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  .prod-card{border:1px solid var(--line); border-radius:10px; background:#fff; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 10px 24px rgba(43,33,23,0.06); transition:transform .22s, box-shadow .22s;}
+  .prod-card:hover{transform:translateY(-4px); box-shadow:0 18px 36px rgba(43,33,23,0.14);}
+  .prod-img{aspect-ratio:1/0.85; background:linear-gradient(155deg,var(--cream-2),#fff); display:flex; align-items:center; justify-content:center; position:relative;}
+  .prod-badge{position:absolute; top:12px; left:12px; background:var(--rust); color:#fff; font-size:10.5px; font-weight:700; padding:4px 9px; border-radius:2px;}
+  .prod-body{padding:16px 16px 18px; display:flex; flex-direction:column; gap:6px; flex:1;}
+  .prod-cat{font-size:11px; color:#8A5A1E; font-weight:800; letter-spacing:.03em; text-transform:uppercase; min-height:14px;}
+  .prod-name{font-family:'Fraunces',serif; font-size:16.5px; color:var(--espresso); min-height:42px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; line-height:1.3;}
+  .prod-price-row{display:flex; align-items:baseline; gap:8px; margin-top:4px;}
+  .prod-price{font-size:16px; font-weight:800; color:var(--ink);}
+  .prod-old{font-size:12.5px; text-decoration:line-through; color:#9A8B75;}
+  .prod-add{margin-top:12px; border:1px solid var(--espresso); background:transparent; color:var(--espresso); padding:9px; border-radius:2px; font-weight:700; font-size:13px; cursor:pointer; transition:.2s;}
+  .prod-add:hover{background:var(--espresso); color:var(--cream);}
+
+  .pay-section{background:var(--espresso); color:var(--cream);}
+  .pay-section{padding:36px 0;}
+  .pay-section .section-head{margin-bottom:18px; align-items:flex-start;}
+  .pay-section .section-head h2{font-size:clamp(18px,2.2vw,23px); margin-top:2px;}
+  .pay-section .section-head p{font-size:12.5px; margin-top:4px;}
+  .pay-section .section-num{font-size:11px;}
+  .pay-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:16px;}
+  .pay-card{border:1px solid rgba(217,174,106,0.28); border-radius:4px; padding:14px 18px; background:rgba(246,239,227,0.04);}
+  .pay-card h3{color:var(--brass-light); font-size:14.5px; margin-bottom:4px; display:flex; align-items:center; gap:6px;}
+  .pay-card p{color:#C9BB9F; font-size:12px; line-height:1.4; margin-bottom:10px;}
+  .pay-methods{display:flex; flex-wrap:wrap; gap:6px;}
+  .pay-chip{border:1px solid rgba(217,174,106,0.35); padding:4px 11px; border-radius:999px; font-size:11px; color:var(--cream);}
+
+  .store-grid{display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;}
+  .info-list{margin-top:24px; display:flex; flex-direction:column; gap:16px;}
+  .info-row{display:flex; gap:14px; align-items:flex-start;}
+  .info-row .ii{width:36px; height:36px; border-radius:50%; background:var(--cream-2); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .info-row b{display:block; font-size:14px; color:var(--espresso);}
+  .info-row span{font-size:13.5px; color:#5C4E3A;}
+  .map-card{border-radius:4px; overflow:hidden; border:1px solid var(--line); aspect-ratio:1/0.8; background:linear-gradient(160deg,var(--cream-2),#fff); display:flex; align-items:center; justify-content:center; position:relative;}
+
+  .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .testi-card{border:1px solid var(--line); border-radius:4px; padding:26px; background:#fff;}
+  .testi-stars{color:var(--brass); font-size:14px; margin-bottom:14px;}
+  .testi-card p{font-size:14px; color:#4A3F30;}
+  .testi-who{margin-top:16px; font-size:13px; font-weight:700; color:var(--espresso);}
+
+  footer{background:var(--espresso-2); color:#C9BB9F; padding:56px 0 26px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px;}
+  .footer-grid h4{color:var(--brass-light); font-size:13px; letter-spacing:.02em; margin-bottom:16px;}
+  .footer-grid a{display:block; font-size:13.5px; color:#C9BB9F; margin-bottom:10px;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.08); margin-top:44px; padding-top:22px; display:flex; justify-content:space-between; font-size:12.5px; color:#8C7E67; flex-wrap:wrap; gap:10px;}
+
+  .overlay{position:fixed; inset:0; background:rgba(20,15,8,0.45); opacity:0; pointer-events:none; transition:opacity .25s; z-index:90;}
+  .overlay.show{opacity:1; pointer-events:auto;}
+  .drawer{position:fixed; top:0; right:0; height:100%; width:400px; max-width:92vw; background:var(--paper); transform:translateX(100%); transition:transform .3s ease; z-index:100; display:flex; flex-direction:column;}
+  .drawer.show{transform:translateX(0);}
+  .drawer-head{padding:22px 24px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;}
+  .drawer-head h3{font-size:19px;}
+  .drawer-body{flex:1; overflow-y:auto; padding:18px 24px;}
+  .cart-item{display:flex; gap:12px; padding:14px 0; border-bottom:1px solid var(--line);}
+  .cart-item .thumb{width:56px; height:56px; border-radius:4px; background:var(--cream-2); flex-shrink:0;}
+  .cart-item .ci-name{font-size:13.5px; font-weight:700; color:var(--espresso);}
+  .cart-item .ci-price{font-size:12.5px; color:#8A5A1E; font-weight:700; margin-top:4px;}
+  .qty-row{display:flex; align-items:center; gap:10px; margin-top:8px;}
+  .qty-btn{width:22px; height:22px; border-radius:50%; border:1px solid var(--line); background:#fff; cursor:pointer; font-size:13px; line-height:1;}
+  .cart-empty{text-align:center; padding:60px 10px; color:#8C7E67; font-size:13.5px;}
+  .drawer-foot{border-top:1px solid var(--line); padding:20px 24px;}
+  .drawer-total{display:flex; justify-content:space-between; font-size:15px; font-weight:800; margin-bottom:16px; color:var(--espresso);}
+  .checkout-btn{width:100%; background:var(--espresso); color:var(--cream); padding:14px; border:none; border-radius:2px; font-weight:700; cursor:pointer; font-size:14px;}
+
+  .modal-overlay{position:fixed; inset:0; background:rgba(20,15,8,0.55); display:none; align-items:center; justify-content:center; z-index:110; padding:20px;}
+  .modal-overlay.show{display:flex;}
+  .modal{background:var(--paper); width:440px; max-width:100%; border-radius:6px; padding:30px; max-height:88vh; overflow-y:auto; position:relative;}
+  .modal h3{font-size:21px; margin-bottom:6px;}
+  .modal .sub{font-size:13px; color:#8C7E67; margin-bottom:22px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block; font-size:12.5px; font-weight:700; color:var(--espresso-2); margin-bottom:6px;}
+  .field input{width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:3px; font-size:13.5px; font-family:'Manrope',sans-serif; background:#fff;}
+  .pay-options{display:flex; flex-direction:column; gap:10px; margin:18px 0 22px;}
+  .pay-opt{border:1.5px solid var(--line); border-radius:4px; padding:14px; display:flex; align-items:center; gap:12px; cursor:pointer;}
+  .pay-opt.selected{border-color:var(--brass); background:rgba(184,134,59,0.06);}
+  .pay-opt .radio{width:18px; height:18px; border-radius:50%; border:2px solid var(--line); flex-shrink:0; position:relative;}
+  .pay-opt.selected .radio{border-color:var(--brass);}
+  .pay-opt.selected .radio::after{content:''; position:absolute; inset:3px; border-radius:50%; background:var(--brass);}
+  .pay-opt b{font-size:13.5px; display:block; color:var(--espresso);}
+  .pay-opt span{font-size:12px; color:#8C7E67;}
+  .place-order-btn{width:100%; background:var(--rust); color:#fff; border:none; padding:14px; border-radius:3px; font-weight:700; font-size:14.5px; cursor:pointer;}
+  .modal-close{position:absolute; top:18px; right:18px; cursor:pointer; background:none; border:none;}
+  .success-box{text-align:center; padding:10px 0 6px;}
+  .success-box .tick{width:56px; height:56px; border-radius:50%; background:#2F6B4F; color:#fff; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; font-size:26px;}
+
+  @media(max-width:960px){
+    nav.links{display:none;}
+    .hero-grid{grid-template-columns:1fr; padding-top:50px;}
+    .hero-visual{order:-1; aspect-ratio:16/10;}
+    .cat-grid{grid-template-columns:1fr;}
+    .prod-grid{grid-template-columns:repeat(2,1fr);}
+    .pay-grid{grid-template-columns:1fr;}
+    .store-grid{grid-template-columns:1fr;}
+    .testi-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .call-btn span.ctext{display:none;}
+  }
+  @media(max-width:560px){
+    .prod-grid{grid-template-columns:1fr 1fr;}
+    .hero-stats{flex-wrap:wrap; row-gap:16px;}
+    .footer-grid{grid-template-columns:1fr;}
+    .modal{padding:20px;}
+    .pmodal{padding:18px;}
+    .pmodal-name{font-size:17px;}
+    .pmodal-price{font-size:17px;}
+    .nav-row{padding:14px 16px;}
+    .drawer-body{padding:16px;}
+    .drawer-head{padding:16px 18px;}
+    .drawer-foot{padding:16px 18px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-row">
+    <div class="brand">
+      <div class="brand-mark">AS</div>
+      <div>
+        <div class="brand-name">Ashok &amp; Son's Traders</div>
+        <div class="brand-tag" data-i18n="tagline">FURNITURE · ELECTRONICS · APPLIANCES</div>
+      </div>
+    </div>
+    <nav class="links">
+      <a href="#products" data-i18n="navProd">Products</a>
+      <a href="#payment" data-i18n="navPay">Payment</a>
+      <a href="#store" data-i18n="navStore">Store Info</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-switch">
+        <button class="lang-btn" id="btnHi" onclick="setLang('hi')">हिंदी</button>
+        <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+      </div>
+      <a class="call-btn" href="tel:+919000000000">📞 <span class="ctext" data-i18n="callStore">Call Store</span></a>
+      <div class="icon-btn" onclick="openMyOrders()" title="My Orders" data-i18n-title="myOrdersBtn">📦</div>
+      <div class="icon-btn" onclick="openCart()">🛒<span class="cart-count" id="cartCount">0</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow-row"><span class="dot"></span><span data-i18n="eyebrow">Lakhisarai's Trusted FURNITURE, ELECTRONICS Showroom</span></div>
+      <h1 data-i18n="heroTitle">Ghar Ke Har Zaroorat Ka Bharosemand Thikana</h1>
+      <p class="hero-sub" data-i18n="heroSub">Sofa se lekar smart TV tak, fridge se lekar dining set tak — Ashok &amp; Son's Traders par milta hai asli daam, asli quality, aur poora vishwas.</p>
+      <div class="hero-stats">
+        <div class="stat"><b>5000+</b><span data-i18n="statCustomers">Khush Grahak</span></div>
+        <div class="stat"><b>4.9★</b><span data-i18n="statYears">2800+ Grahakon Ki Rating</span></div>
+      </div>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})" data-i18n="shopNow">Shop Karein</button>
+        <a class="btn-ghost" href="https://wa.me/919000000000" target="_blank" rel="noopener noreferrer" data-i18n="whatsappOrder">WhatsApp Par Order Karein</a>
+      </div>
+    </div>
+    <div class="hero-visual" id="heroVisual">
+      <div class="frame"></div>
+      <svg class="glyph" id="heroGlyph" viewBox="0 0 64 64" fill="none"><path d="M8 40 L8 20 Q8 14 14 14 L50 14 Q56 14 56 20 L56 40" stroke="#D9AE6A" stroke-width="2"/><path d="M4 44 L60 44" stroke="#D9AE6A" stroke-width="2"/><path d="M10 44 L10 52 M54 44 L54 52" stroke="#D9AE6A" stroke-width="2"/></svg>
+      <div class="cardfloat">
+        <div class="label" id="arrivalBadge" data-i18n="newStock">NAYA STOCK</div>
+        <div class="name" id="arrivalName" data-i18n="heroProdName">Sheesham Wood Dining Set</div>
+        <div class="price" id="arrivalPrice" data-i18n="heroProdPrice">₹28,999 se shuru</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ad-banner-wrap" id="adBannerWrap" style="display:none;">
+  <div class="ad-banner" id="adBanner">
+    <div id="adSlides"></div>
+    <div class="ad-dots" id="adDots"></div>
+  </div>
+</div>
+
+<div class="trust-strip">
+  <div class="trust-row">
+    <div class="trust-item"><span class="tick">✓</span><span data-i18n="trust1">Free Home Delivery (Lakhisarai City)</span></div>
+    <div class="trust-item"><span class="tick">✓</span><span data-i18n="trust2">Online Or Pay At Shop — Both Work</span></div>
+    <div class="trust-item"><span class="tick">✓</span><span data-i18n="trust3">EMI Available On Select Items</span></div>
+    <div class="trust-item"><span class="tick">✓</span><span data-i18n="trust4">1 Year Warranty (Electronics &amp; Appliances)</span></div>
+  </div>
+</div>
+
+<section class="section" id="products" style="background:var(--cream-2); padding-bottom:90px;">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num" data-i18n="prodEyebrow">Bestsellers</span>
+        <h2 data-i18n="prodTitle">Sabse Zyada Pasand Kiye Gaye Products</h2>
+      </div>
+    </div>
+    <div class="prod-tabs" id="prodTabs">
+      <div class="prod-tab active" data-cat="all" data-i18n="tabAll">Sabhi</div>
+      <div class="prod-tab" data-cat="furniture" data-i18n="tabFurniture">Furniture</div>
+      <div class="prod-tab" data-cat="electronics" data-i18n="tabElec">Electronics</div>
+      <div class="prod-tab" data-cat="appliances" data-i18n="tabAppl">Appliances</div>
+    </div>
+    <div class="prod-tabs" id="subcatTabs" style="display:none; margin-top:-24px;"></div>
+    <div class="prod-grid" id="prodGrid"></div>
+  </div>
+</section>
+
+<section class="section pay-section" id="payment">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num" style="color:var(--brass-light);" data-i18n="payEyebrow">Payment</span>
+        <h2 style="color:var(--cream);" data-i18n="payTitle">Jaise Aapko Suvidha Ho, Waise Bhugtan Karein</h2>
+      </div>
+      <p style="color:#C9BB9F;" data-i18n="paySub">Checkout ke waqt aap dono me se koi bhi option chun sakte hain.</p>
+    </div>
+    <div class="pay-grid">
+      <div class="pay-card">
+        <h3 data-i18n="payOnlineTitle">💳 Online Payment</h3>
+        <p data-i18n="payOnlineDesc">Order abhi confirm karein aur ghar baithe surakshit tareeke se payment karein. Card, UPI aur netbanking — sabhi supported.</p>
+        <div class="pay-methods">
+          <div class="pay-chip">UPI</div>
+          <div class="pay-chip" data-i18n="chipCard">Debit / Credit Card</div>
+          <div class="pay-chip" data-i18n="chipNet">Netbanking</div>
+          <div class="pay-chip" data-i18n="chipWallet">Wallets</div>
+        </div>
+      </div>
+      <div class="pay-card">
+        <h3 data-i18n="payShopTitle">🏬 Pay at Shop</h3>
+        <p data-i18n="payShopDesc">Order online karein, payment jab saaman dukaan se le jaayein ya delivery ke waqt karein — cash ya card dono chalega.</p>
+        <div class="pay-methods">
+          <div class="pay-chip" data-i18n="chipCash">Cash</div>
+          <div class="pay-chip" data-i18n="chipCardDelivery">Card on Delivery</div>
+          <div class="pay-chip" data-i18n="chipUpiDelivery">UPI on Delivery</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="store">
+  <div class="wrap">
+    <div class="store-grid">
+      <div>
+        <span class="section-num" data-i18n="storeEyebrow">Store Info</span>
+        <h2 data-i18n="storeTitle">Hamse Miliye, Dukaan Par Ya Online</h2>
+        <p style="margin-top:14px;" data-i18n="storeSub">Teen peedhiyon se Lakhisarai ke parivaron ki seva kar rahe hain. Aayiye aur khud dekhiye quality.</p>
+        <div class="info-list">
+          <div class="info-row"><div class="ii">📍</div><div><b data-i18n="addrLbl">Address</b><span>Station Road, Lakhisarai, Bihar — 811311</span></div></div>
+          <div class="info-row"><div class="ii">🕐</div><div><b data-i18n="timeLbl">Timing</b><span data-i18n="timeVal">Somvar–Shanivar, Subah 10:00 – Raat 8:30</span></div></div>
+          <div class="info-row"><div class="ii">📞</div><div><b data-i18n="contactLbl">Contact</b><span>+91 90000 00000 · ashokandsons@example.com</span></div></div>
+        </div>
+      </div>
+      <div class="map-card" id="mapCard">
+        <iframe id="mapIframe" title="Store Location" style="position:absolute; inset:0; width:100%; height:100%; border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a id="mapDirectionsBtn" href="#" target="_blank" rel="noopener noreferrer" style="position:absolute; bottom:14px; right:14px; z-index:2; background:var(--espresso); color:#FBF3E4; font-size:12.5px; font-weight:800; padding:10px 16px; border-radius:999px; display:flex; align-items:center; gap:6px; box-shadow:0 10px 22px rgba(43,33,23,0.3);">📍 <span data-i18n="getDirections">Directions Paayein</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--cream-2);">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num" data-i18n="testiEyebrow">Grahak Kya Kehte Hain</span>
+        <h2 data-i18n="testiTitle">Hamare Customers Ka Anubhav</h2>
+      </div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p data-i18n="testi1">Sofa set ki quality bahut achhi hai aur delivery bhi time par hui. Payment online kiya, koi dikkat nahi.</p><div class="testi-who">— Rakesh Kumar, Lakhisarai</div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p data-i18n="testi2">Fridge lene gaye the, staff ne bahut acche se samjhaya. Dukaan par hi cash de diya, bahut aaram se.</p><div class="testi-who">— Sunita Devi, Lakhisarai</div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p data-i18n="testi3">Purane grahak hain, teesri baar order kiya hai. Dam bhi sahi aur saman bhi asli.</p><div class="testi-who">— Manoj Sah, Bodh Gaya</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand-name" style="color:var(--brass-light); font-size:20px;">Ashok &amp; Son's Traders</div>
+        <p style="color:#8C7E67; font-size:13px; margin-top:12px; max-width:32ch;" data-i18n="footerDesc">Lakhisarai, Bihar ki bharosemand furniture, electronics aur home appliances ki dukaan.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footCatHead">Categories</h4>
+        <a href="#products" data-i18n="catFurnitureTitle">Furniture</a>
+        <a href="#products" data-i18n="catElecTitle">Electronics</a>
+        <a href="#products" data-i18n="catApplTitle">Appliances</a>
+      </div>
+      <div>
+        <h4 data-i18n="footStoreHead">Store</h4>
+        <a href="#store" data-i18n="footAddrTime">Address &amp; Timing</a>
+        <a href="#payment" data-i18n="footPayOpt">Payment Options</a>
+        <a href="tel:+919000000000" data-i18n="callStore">Call Us</a>
+      </div>
+      <div>
+        <h4 data-i18n="footConnectHead">Connect</h4>
+        <a href="https://wa.me/919000000000" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="mailto:ashokandsons@example.com" data-i18n="footEmail">Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footRights">© 2026 Ashok &amp; Son's Traders. Sabhi adhikar surakshit.</span>
+      <span data-i18n="footMade">Design ki gayi pyaar se, Lakhisarai mein.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3 data-i18n="cartTitle">Aapka Cart</h3>
+    <button class="modal-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot" id="drawerFoot" style="display:none;">
+    <div class="drawer-total"><span data-i18n="total">Total</span><span id="cartTotal">₹0</span></div>
+    <button class="checkout-btn" onclick="openCheckout()" data-i18n="checkoutBtn">Checkout Karein</button>
+  </div>
+</div>
+
+<div class="overlay" id="myOrdersOverlay" onclick="closeMyOrders()"></div>
+<div class="drawer" id="myOrdersDrawer">
+  <div class="drawer-head">
+    <h3 data-i18n="myOrdersTitle">Mere Orders</h3>
+    <button class="modal-close" onclick="closeMyOrders()">✕</button>
+  </div>
+  <div class="drawer-body" id="myOrdersBody">
+    <div style="margin-bottom:18px;">
+      <label style="display:block; font-size:12.5px; font-weight:700; color:var(--espresso-2); margin-bottom:6px;" data-i18n="myOrdersMobileLbl">Apna Mobile Number Daalein</label>
+      <div style="display:flex; gap:8px;">
+        <input type="tel" id="myOrdersMobileInput" maxlength="10" inputmode="numeric" pattern="[0-9]{10}" style="flex:1; padding:11px 12px; border:1px solid var(--line); border-radius:3px; font-size:13.5px; font-family:'Manrope',sans-serif;" data-i18n-ph="mobilePh" placeholder="10 digit number">
+        <button class="checkout-btn" style="width:auto; padding:11px 18px;" onclick="lookupMyOrders()" data-i18n="myOrdersViewBtn">Dekhein</button>
+      </div>
+    </div>
+    <div id="myOrdersList"></div>
+  </div>
+</div>
+
+<div class="pmodal-overlay" id="pmodalOverlay">
+  <div class="pmodal">
+    <button class="pmodal-close" onclick="closeProductModal()">✕</button>
+    <div class="pmodal-main" id="pmodalMain">
+      <img id="pmodalImg" src="" alt="">
+    </div>
+    <div class="spin-hint" id="pmodalSpinHint" style="display:none;" data-i18n="spinHint">Ghumane ke liye photo par ungli ya mouse se left-right drag karein</div>
+    <div class="pmodal-thumbs" id="pmodalThumbs"></div>
+    <button class="pmodal-spin-btn" id="pmodalSpinBtn" style="display:none;" onclick="toggle360Mode()">🔄 <span data-i18n="spin360Btn">360° Ghuma Kar Dekhein</span></button>
+    <div class="pmodal-name" id="pmodalName"></div>
+    <div class="pmodal-price" id="pmodalPrice"></div>
+    <div class="pmodal-desc" id="pmodalDesc" style="font-size:13.5px; color:#5C4E3A; line-height:1.6; margin-bottom:16px; display:none;"></div>
+    <button class="place-order-btn" id="pmodalAddBtn" onclick="addToCartFromModal()"><span data-i18n="prodAdd">Add To Cart</span></button>
+    <button class="place-order-btn" style="margin-top:10px; background:var(--rust);" onclick="bookNowFromModal()"><span data-i18n="bookNowBtn">Book Now</span></button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="checkoutOverlay">
+  <div class="modal" id="checkoutModal">
+    <button class="modal-close" onclick="closeCheckout()">✕</button>
+    <div id="checkoutForm">
+      <h3 data-i18n="checkoutTitle">Order Confirm Karein</h3>
+      <div class="sub" data-i18n="checkoutSub">Apni details bharein aur payment tarika chunein</div>
+      <div class="field"><label data-i18n="fullNameLbl">Poora Naam</label><input type="text" id="nameField" maxlength="60" autocomplete="name" data-i18n-ph="fullNamePh" placeholder="Jaise: Rakesh Kumar"></div>
+      <div class="field"><label data-i18n="mobileLbl">Mobile Number</label><input type="tel" id="mobileField" maxlength="10" inputmode="numeric" pattern="[0-9]{10}" autocomplete="tel" data-i18n-ph="mobilePh" placeholder="10 digit number"></div>
+      <div class="field"><label data-i18n="addressLbl">Delivery Address</label></div>
+      <div class="field"><input type="text" id="houseField" maxlength="80" autocomplete="address-line1" data-i18n-ph="housePh" placeholder="House No. / Name"></div>
+      <div class="field"><input type="text" id="fullAddressField" maxlength="200" autocomplete="street-address" data-i18n-ph="fullAddressPh" placeholder="Full Address (Mohalla / Gali / Sheher)"></div>
+      <div class="field" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <input type="text" id="wardField" maxlength="20" data-i18n-ph="wardPh" placeholder="Ward Number">
+        <input type="text" id="pincodeField" maxlength="6" inputmode="numeric" pattern="[0-9]{6}" data-i18n-ph="pincodePh" placeholder="Pincode">
+      </div>
+      <div class="field"><input type="text" id="landmarkField" maxlength="80" data-i18n-ph="landmarkPh" placeholder="Landmark"></div>
+      <div class="field" id="deliveryChargeNote" style="display:none; font-size:12.5px; font-weight:800; padding:8px 12px; border-radius:6px;"></div>
+      <div class="field" id="formError" style="display:none; color:var(--rust); font-size:12.5px; font-weight:700;"></div>
+      <div class="pay-options" id="payOptions">
+        <div class="pay-opt selected" data-pay="online"><div class="radio"></div><div><b data-i18n="payOnlineTitle2">Online Payment</b><span data-i18n="payOnlineNote">UPI, Card ya Netbanking se abhi bhugtan</span></div></div>
+        <div class="pay-opt" data-pay="shop"><div class="radio"></div><div><b data-i18n="payShopTitle2">Pay at Shop</b><span data-i18n="payShopNote">Saaman lete waqt ya delivery par bhugtan</span></div></div>
+      </div>
+      <button class="place-order-btn" id="placeOrderBtn" onclick="placeOrder()"><span data-i18n="placeOrderBtn">Order Place Karein</span> — <span id="modalTotal">₹0</span></button>
+    </div>
+
+    <div id="upiPayBox" style="display:none;">
+      <h3 data-i18n="upiPayTitle">UPI Se Payment Karein</h3>
+      <div class="sub" data-i18n="upiPaySub">Apna UPI app chunein — payment app khud khul jayega</div>
+      <div class="field" style="background:var(--cream-2); border-radius:6px; padding:14px; margin-bottom:16px;">
+        <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px;"><span data-i18n="upiOrderIdLbl">Order ID</span><b id="upiOrderId"></b></div>
+        <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px;"><span data-i18n="upiPayToLbl">Pay To (UPI ID)</span><b id="upiIdShown"></b></div>
+        <div style="display:flex; justify-content:space-between; font-size:15px; font-weight:800;"><span data-i18n="upiAmountLbl">Amount</span><b id="upiAmountShown"></b></div>
+      </div>
+      <div class="pay-options" id="upiAppOptions" style="margin-top:0;">
+        <div class="pay-opt" data-upi="gpay"><div style="width:28px;text-align:center;">📱</div><div><b>Google Pay</b><span data-i18n="upiOpenApp">App khol kar payment karein</span></div></div>
+        <div class="pay-opt" data-upi="phonepe"><div style="width:28px;text-align:center;">📱</div><div><b>PhonePe</b><span data-i18n="upiOpenApp">App khol kar payment karein</span></div></div>
+        <div class="pay-opt" data-upi="paytm"><div style="width:28px;text-align:center;">📱</div><div><b>Paytm</b><span data-i18n="upiOpenApp">App khol kar payment karein</span></div></div>
+        <div class="pay-opt" data-upi="generic"><div style="width:28px;text-align:center;">🏦</div><div><b data-i18n="upiAnyApp">Koi Bhi UPI App</b><span data-i18n="upiOpenApp">App khol kar payment karein</span></div></div>
+      </div>
+      <p style="font-size:12px; margin-bottom:16px;" data-i18n="upiDesktopNote">Note: Yeh buttons mobile par UPI app kholte hain. Computer par UPI ID copy karke apne phone se payment karein.</p>
+      <button class="place-order-btn" style="background:var(--green,#2F6B4F);" onclick="confirmUpiPaid()"><span data-i18n="upiPaidBtn">Maine Payment Kar Diya Hai</span></button>
+      <button class="place-order-btn" style="margin-top:10px; background:transparent; color:var(--espresso); border:1px solid var(--line);" onclick="switchToPayAtShop()"><span data-i18n="upiSwitchShop">Iske Bajaye Pay at Shop Karein</span></button>
+    </div>
+
+    <div class="success-box" id="successBox" style="display:none;">
+      <div class="tick">✓</div>
+      <h3 style="text-align:center;" id="successHeading" data-i18n="orderConfirmed">Order Confirm Ho Gaya!</h3>
+      <p style="text-align:center; margin-top:8px;"><span id="successMsg" data-i18n="thanksMsg">Dhanyawad! Hum jald hi aapse sampark karenge. Order ID:</span> <b id="orderId"></b></p>
+      <button class="place-order-btn" style="margin-top:24px; background:transparent; color:var(--espresso); border:1px solid var(--line);" onclick="closeCheckout(); openMyOrders();"><span data-i18n="myOrdersLinkAfterOrder">Apne order ki status yahan dekhein</span></button>
+      <button class="place-order-btn" style="margin-top:10px; background:var(--espresso);" onclick="closeCheckout()" data-i18n="okBtn">Theek Hai</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="noServiceOverlay">
+  <div class="modal" style="max-width:380px; text-align:center;">
+    <button class="modal-close" onclick="closeNoServicePopup()">✕</button>
+    <div style="font-size:40px; margin-bottom:6px;">📞</div>
+    <h3 data-i18n="noServiceHeading">Is Pincode Par Online Order Available Nahi</h3>
+    <p style="margin-top:10px; font-size:13.5px; color:#5C4E3A;" data-i18n="noServiceMsg">Iss area mein online order abhi shuru nahi hua hai. Kripya humein seedha call karke apna order confirm karwayein.</p>
+    <a class="place-order-btn" id="noServiceCallBtn" href="tel:+919000000000" style="display:block; margin-top:20px; background:var(--espresso); text-decoration:none;">📞 <span data-i18n="callStore">Call Store</span></a>
+    <a class="place-order-btn" id="noServiceWaBtn" href="https://wa.me/919000000000" target="_blank" rel="noopener noreferrer" style="display:block; margin-top:10px; background:#25D366; text-decoration:none;">💬 <span data-i18n="whatsappOrder">WhatsApp Par Order Karein</span></a>
+  </div>
+</div>
+
+<!-- ===== Firebase Cloud Sync ===== -->
+<!-- Orders, products aur store settings ab is Firebase project mein save hote hain,
+     isliye customer website aur owner dashboard chahe alag-alag phone/computer par
+     khule hon, dono ek hi live data dekhte hain. -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCrySiwAB63vDFZCayXsx_Q8jf4s71LB_c",
+    authDomain: "ashokandsonstraders-f8881.firebaseapp.com",
+    projectId: "ashokandsonstraders-f8881",
+    storageBucket: "ashokandsonstraders-f8881.firebasestorage.app",
+    messagingSenderId: "784751457281",
+    appId: "1:784751457281:web:50e82ed97c81ea4f21bc00"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  db.enablePersistence({synchronizeTabs:true}).catch(function(){ /* offline cache not critical, ignore */ });
+
+  // ---- Generic helpers shared by the store site & owner dashboard ----
+  const CLOUD_SETTINGS_DOCS = {
+    astHeroSettings: 'heroSettings', astPaymentSettings: 'paymentSettings',
+    astSubcategories: 'subcategories', astStoreSettings: 'storeSettings',
+    astDeliveryRules: 'deliveryRules', astBanners: 'banners'
+  };
+  function cloudSaveSettings(localKey, value){
+    const docId = CLOUD_SETTINGS_DOCS[localKey];
+    if(!docId) return;
+    db.collection('settings').doc(docId).set({ data: value, updatedAt: Date.now() })
+      .catch(function(err){ console.warn('Cloud save failed for', localKey, err); });
+  }
+  function cloudWatchSettings(localKey, callback){
+    const docId = CLOUD_SETTINGS_DOCS[localKey];
+    if(!docId) return;
+    db.collection('settings').doc(docId).onSnapshot(function(snap){
+      if(!snap.exists) return;
+      const value = snap.data().data;
+      try{ localStorage.setItem(localKey, JSON.stringify(value)); }catch(e){}
+      callback(value);
+    }, function(err){ console.warn('Cloud sync failed for', localKey, err); });
+  }
+  function cloudSaveOrder(order){
+    db.collection('orders').doc(String(order.id)).set(order)
+      .catch(function(err){ console.warn('Order cloud save failed', err); });
+  }
+  function cloudUpdateOrderStatus(id, status){
+    db.collection('orders').doc(String(id)).update({status: status})
+      .catch(function(err){ console.warn('Order status cloud update failed', err); });
+  }
+  function cloudDeleteOrder(id){
+    db.collection('orders').doc(String(id)).delete()
+      .catch(function(err){ console.warn('Order cloud delete failed', err); });
+  }
+  function cloudWatchAllOrders(callback){
+    db.collection('orders').onSnapshot(function(snap){
+      const orders = snap.docs.map(function(d){ return d.data(); });
+      orders.sort(function(a,b){ return new Date(b.placedAt||0) - new Date(a.placedAt||0); });
+      try{ localStorage.setItem('astOrders', JSON.stringify(orders)); }catch(e){}
+      callback(orders);
+    }, function(err){ console.warn('Orders cloud sync failed', err); });
+  }
+  function cloudWatchOrdersByMobile(mobile, callback){
+    return db.collection('orders').where('mobile','==',mobile).onSnapshot(function(snap){
+      callback(snap.docs.map(function(d){ return d.data(); }));
+    }, function(err){ console.warn('Order lookup cloud sync failed', err); });
+  }
+  function cloudSaveProduct(product){
+    db.collection('products').doc(String(product.id)).set(product)
+      .catch(function(err){ console.warn('Product cloud save failed', err); });
+  }
+  function cloudDeleteProduct(id){
+    db.collection('products').doc(String(id)).delete()
+      .catch(function(err){ console.warn('Product cloud delete failed', err); });
+  }
+  function cloudWatchAllProducts(callback){
+    db.collection('products').onSnapshot(function(snap){
+      const products = snap.docs.map(function(d){ return d.data(); });
+      try{ localStorage.setItem('astProducts', JSON.stringify(products)); }catch(e){}
+      callback(products);
+    }, function(err){ console.warn('Products cloud sync failed', err); });
+  }
+</script>
+<!-- ===== End Firebase Cloud Sync ===== -->
+
+<script>
+const dict = {
+  hi:{
+    tagline:"फर्नीचर · इलेक्ट्रॉनिक्स · अप्लायंसेज", navCat:"श्रेणियाँ", navProd:"उत्पाद", navPay:"भुगतान", navStore:"दुकान की जानकारी",
+    callStore:"दुकान को कॉल करें", eyebrow:"लखीसराय का भरोसेमंद फर्नीचर, इलेक्ट्रॉनिक्स शोरूम",
+    heroTitle:"घर की हर ज़रूरत का भरोसेमंद ठिकाना",
+    heroSub:"सोफ़े से लेकर स्मार्ट टीवी तक, फ्रिज से लेकर डाइनिंग सेट तक — अशोक एंड संस ट्रेडर्स पर मिलता है असली दाम, असली गुणवत्ता, और पूरा विश्वास।",
+    statCustomers:"खुश ग्राहक", statYears:"2800+ ग्राहकों की रेटिंग",
+    shopNow:"शॉपिंग करें", whatsappOrder:"व्हाट्सएप पर ऑर्डर करें",
+    newStock:"नया स्टॉक", heroProdName:"शीशम की लकड़ी का डाइनिंग सेट", heroProdPrice:"₹28,999 से शुरू",
+    trust1:"मुफ़्त होम डिलीवरी (लखीसराय शहर)", trust2:"ऑनलाइन या दुकान पर भुगतान — दोनों चलेगा", trust3:"चुनिंदा वस्तुओं पर EMI उपलब्ध", trust4:"1 साल की वारंटी (इलेक्ट्रॉनिक्स और अप्लायंसेज)",
+    catEyebrow:"श्रेणियाँ", catTitle:"एक ही छत के नीचे तीन दुकानों जैसी विविधता",
+    catSub:"फर्नीचर, इलेक्ट्रॉनिक्स और होम अप्लायंसेज — हर श्रेणी में ब्रांडेड और लोकल दोनों विकल्प।",
+    catFurnitureTitle:"फर्नीचर", catFurnitureDesc:"सोफ़ा सेट, बेड, डाइनिंग टेबल, अलमारी, ऑफिस फर्नीचर — ठोस लकड़ी और इंजीनियर्ड दोनों।", catFurnitureCount:"120+ उत्पाद",
+    catElecTitle:"इलेक्ट्रॉनिक्स", catElecDesc:"एलईडी टीवी, स्पीकर, मिक्सर ग्राइंडर, इस्त्री, सीलिंग फैन — सभी टॉप ब्रांड उपलब्ध।", catElecCount:"180+ उत्पाद",
+    catApplTitle:"होम अप्लायंसेज", catApplDesc:"फ्रिज, वॉशिंग मशीन, एसी, कूलर, माइक्रोवेव — ऊर्जा-कुशल मॉडलों के साथ।", catApplCount:"95+ उत्पाद",
+    prodEyebrow:"बेस्टसेलर", prodTitle:"सबसे ज़्यादा पसंद किए गए उत्पाद",
+    tabAll:"सभी", tabFurniture:"फर्नीचर", tabElec:"इलेक्ट्रॉनिक्स", tabAppl:"अप्लायंसेज",
+    payEyebrow:"भुगतान", payTitle:"जैसे आपको सुविधा हो, वैसे भुगतान करें", paySub:"चेकआउट के समय आप दोनों में से कोई भी विकल्प चुन सकते हैं।",
+    payOnlineTitle:"💳 ऑनलाइन भुगतान", payOnlineDesc:"अभी ऑर्डर कन्फर्म करें और घर बैठे सुरक्षित तरीक़े से भुगतान करें। कार्ड, यूपीआई और नेटबैंकिंग — सभी समर्थित।",
+    chipCard:"डेबिट / क्रेडिट कार्ड", chipNet:"नेटबैंकिंग", chipWallet:"वॉलेट",
+    payShopTitle:"🏬 दुकान पर भुगतान", payShopDesc:"ऑनलाइन ऑर्डर करें, भुगतान तब करें जब सामान दुकान से ले जाएँ या डिलीवरी के समय — कैश या कार्ड दोनों चलेगा।",
+    chipCash:"नकद", chipCardDelivery:"डिलीवरी पर कार्ड", chipUpiDelivery:"डिलीवरी पर यूपीआई",
+    storeEyebrow:"दुकान की जानकारी", storeTitle:"हमसे मिलिए, दुकान पर या ऑनलाइन", storeSub:"तीन पीढ़ियों से लखीसराय के परिवारों की सेवा कर रहे हैं। आइए और ख़ुद देखिए गुणवत्ता।",
+    addrLbl:"पता", timeLbl:"समय", timeVal:"सोमवार–शनिवार, सुबह 10:00 – रात 8:30", contactLbl:"संपर्क",
+    testiEyebrow:"ग्राहक क्या कहते हैं", testiTitle:"हमारे ग्राहकों का अनुभव",
+    testi1:"सोफ़ा सेट की गुणवत्ता बहुत अच्छी है और डिलीवरी भी समय पर हुई। भुगतान ऑनलाइन किया, कोई दिक़्क़त नहीं।",
+    testi2:"फ्रिज लेने गए थे, स्टाफ़ ने बहुत अच्छे से समझाया। दुकान पर ही नकद दे दिया, बहुत आराम से।",
+    testi3:"पुराने ग्राहक हैं, तीसरी बार ऑर्डर किया है। दाम भी सही और सामान भी असली।",
+    footerDesc:"लखीसराय, बिहार की भरोसेमंद फर्नीचर, इलेक्ट्रॉनिक्स और होम अप्लायंसेज की दुकान।",
+    footCatHead:"श्रेणियाँ", footStoreHead:"दुकान", footConnectHead:"जुड़िए",
+    footAddrTime:"पता और समय", footPayOpt:"भुगतान विकल्प", footEmail:"ईमेल",
+    footRights:"© 2026 अशोक एंड संस ट्रेडर्स। सभी अधिकार सुरक्षित।", footMade:"प्यार से डिज़ाइन किया गया, लखीसराय में।",
+    cartTitle:"आपका कार्ट", total:"कुल", checkoutBtn:"चेकआउट करें",
+    checkoutTitle:"ऑर्डर कन्फर्म करें", checkoutSub:"अपनी जानकारी भरें और भुगतान का तरीक़ा चुनें",
+    fullNameLbl:"पूरा नाम", fullNamePh:"जैसे: राकेश कुमार", mobileLbl:"मोबाइल नंबर", mobilePh:"10 अंकों का नंबर",
+    addressLbl:"डिलीवरी का पता", addressPh:"घर / दुकान का पता",
+    housePh:"घर नंबर / नाम", fullAddressPh:"पूरा पता (मोहल्ला / गली / शहर)", wardPh:"वार्ड नंबर", pincodePh:"पिनकोड", landmarkPh:"लैंडमार्क",
+    fullAddressRequired:"कृपया पूरा पता भरें।", pincodeNotServiceable:"⚠️ इस पिनकोड पर अभी ऑनलाइन ऑर्डर नहीं होता — कृपया कॉल करें",
+    noServiceHeading:"इस पिनकोड पर ऑनलाइन ऑर्डर उपलब्ध नहीं", noServiceMsg:"इस इलाके में ऑनलाइन ऑर्डर अभी शुरू नहीं हुआ है। कृपया हमें सीधा कॉल करके अपना ऑर्डर कन्फर्म करवाएं।",
+    waHeading:"🛒 नया ऑर्डर — अशोक एंड संस ट्रेडर्स", waOrderId:"ऑर्डर आईडी", waName:"नाम", waMobile:"मोबाइल", waAddress:"पता", waProduct:"प्रोडक्ट", waAmount:"राशि", waPayment:"भुगतान स्थिति",
+    waStatusVerify:"ऑनलाइन भुगतान (वेरिफाई होना बाकी)", waStatusOnlinePaid:"ऑनलाइन भुगतान", waStatusShop:"दुकान पर भुगतान (बाकी)",
+    myOrdersBtn:"मेरे ऑर्डर", myOrdersTitle:"मेरे ऑर्डर", myOrdersMobileLbl:"अपना मोबाइल नंबर डालें", myOrdersViewBtn:"देखें",
+    myOrdersEmpty:"इस मोबाइल नंबर पर कोई ऑर्डर नहीं मिला।", myOrdersInvalidMobile:"कृपया सही 10 अंकों का मोबाइल नंबर डालें।",
+    myOrdersLinkAfterOrder:"अपने ऑर्डर की स्थिति यहाँ देखें", myOrdersAddrLbl:"डिलीवरी पता", myOrdersIdLbl:"ऑर्डर आईडी",
+    statusPaidC:"भुगतान हो गया", statusPendingC:"भुगतान बाकी है", statusDeliveredC:"डिलीवर हो गया", statusVerifyC:"भुगतान वेरिफाई हो रहा है",
+    wardLbl:"वार्ड नं.", houseRequired:"कृपया घर नंबर / नाम भरें।", pincodeRequired:"कृपया सही 6 अंकों का पिनकोड भरें।",
+    bookNowBtn:"अभी बुक करें", getDirections:"दिशा-निर्देश पाएं",
+    deliveryChargeApplies:"इस पिनकोड पर डिलीवरी चार्ज: {amt}", deliveryFreeNote:"🎉 इस पिनकोड पर मुफ़्त डिलीवरी!",
+    payOnlineTitle2:"ऑनलाइन भुगतान", payOnlineNote:"यूपीआई, कार्ड या नेटबैंकिंग से अभी भुगतान",
+    payShopTitle2:"दुकान पर भुगतान", payShopNote:"सामान लेते समय या डिलीवरी पर भुगतान",
+    placeOrderBtn:"ऑर्डर प्लेस करें", orderConfirmed:"ऑर्डर कन्फर्म हो गया!",
+    thanksMsg:"धन्यवाद! हम जल्द ही आपसे संपर्क करेंगे। ऑर्डर आईडी:", okBtn:"ठीक है",
+    emptyCart:"आपका कार्ट ख़ाली है।", emptyCartSub:"कुछ उत्पाद जोड़ें।",
+    nameRequired:"कृपया अपना नाम भरें।",
+    mobileRequired:"कृपया सही 10 अंकों का मोबाइल नंबर भरें।",
+    addressRequired:"कृपया डिलीवरी का पता भरें।",
+    upiNotConfigured:"ऑनलाइन भुगतान अभी उपलब्ध नहीं है। कृपया 'दुकान पर भुगतान' चुनें।",
+    upiPayTitle:"यूपीआई से भुगतान करें", upiPaySub:"अपना यूपीआई ऐप चुनें — भुगतान ऐप ख़ुद खुल जाएगा",
+    upiOrderIdLbl:"ऑर्डर आईडी", upiPayToLbl:"भुगतान प्राप्तकर्ता (यूपीआई आईडी)", upiAmountLbl:"राशि",
+    upiOpenApp:"ऐप खोलकर भुगतान करें", upiAnyApp:"कोई भी यूपीआई ऐप",
+    upiDesktopNote:"नोट: ये बटन मोबाइल पर यूपीआई ऐप खोलते हैं। कंप्यूटर पर यूपीआई आईडी कॉपी करके अपने फ़ोन से भुगतान करें।",
+    upiPaidBtn:"मैंने भुगतान कर दिया है", upiSwitchShop:"इसके बजाय दुकान पर भुगतान करें",
+    verifyingHeading:"भुगतान सत्यापित हो रहा है", verifyingMsg:"धन्यवाद! दुकान आपके भुगतान की पुष्टि करके जल्द ही संपर्क करेगी। ऑर्डर आईडी:",
+    catLabels:{furniture:"फर्नीचर", electronics:"इलेक्ट्रॉनिक्स", appliances:"अप्लायंसेज"},
+    prodAdd:"कार्ट में डालें",
+    viewPhotosBtn:"फ़ोटो देखें", tabAllSub:"सभी",
+    spinHint:"घुमाने के लिए फ़ोटो पर उंगली या माउस से बाएँ-दाएँ ड्रैग करें",
+    spin360Btn:"360° घुमाकर देखें"
+  },
+  en:{
+    tagline:"FURNITURE · ELECTRONICS · APPLIANCES", navCat:"Categories", navProd:"Products", navPay:"Payment", navStore:"Store Info",
+    callStore:"Call Store", eyebrow:"Lakhisarai's Trusted FURNITURE, ELECTRONICS Showroom",
+    heroTitle:"Your Trusted Home For Every Household Need",
+    heroSub:"From sofas to smart TVs, fridges to dining sets — Ashok & Son's Traders brings you honest prices, genuine quality, and complete trust.",
+    statCustomers:"Happy Customers", statYears:"Rating by 2800+ Customers",
+    shopNow:"Shop Now", whatsappOrder:"Order On WhatsApp",
+    newStock:"NEW ARRIVAL", heroProdName:"Sheesham Wood Dining Set", heroProdPrice:"Starting at ₹28,999",
+    trust1:"Free Home Delivery (Lakhisarai City)", trust2:"Online Or Pay At Shop — Both Work", trust3:"EMI Available On Select Items", trust4:"1 Year Warranty (Electronics & Appliances)",
+    catEyebrow:"Categories", catTitle:"Three Stores' Worth Of Variety, Under One Roof",
+    catSub:"Furniture, electronics and home appliances — branded and local options in every category.",
+    catFurnitureTitle:"Furniture", catFurnitureDesc:"Sofa sets, beds, dining tables, wardrobes, office furniture — both solid wood and engineered wood.", catFurnitureCount:"120+ Products",
+    catElecTitle:"Electronics", catElecDesc:"LED TVs, speakers, mixer grinders, irons, ceiling fans — all top brands available.", catElecCount:"180+ Products",
+    catApplTitle:"Home Appliances", catApplDesc:"Fridges, washing machines, ACs, coolers, microwaves — with energy-efficient models.", catApplCount:"95+ Products",
+    prodEyebrow:"Bestsellers", prodTitle:"Our Most-Loved Products",
+    tabAll:"All", tabFurniture:"Furniture", tabElec:"Electronics", tabAppl:"Appliances",
+    payEyebrow:"Payment", payTitle:"Pay However Works Best For You", paySub:"At checkout, you can choose either of the two options below.",
+    payOnlineTitle:"💳 Online Payment", payOnlineDesc:"Confirm your order right away and pay securely from home. Card, UPI and netbanking — all supported.",
+    chipCard:"Debit / Credit Card", chipNet:"Netbanking", chipWallet:"Wallets",
+    payShopTitle:"🏬 Pay At Shop", payShopDesc:"Place your order online, then pay when you collect it from the shop or at delivery — cash or card, both work.",
+    chipCash:"Cash", chipCardDelivery:"Card On Delivery", chipUpiDelivery:"UPI On Delivery",
+    storeEyebrow:"Store Info", storeTitle:"Visit Us, At The Shop Or Online", storeSub:"Serving Lakhisarai's families for three generations. Come and see the quality for yourself.",
+    addrLbl:"Address", timeLbl:"Timing", timeVal:"Monday–Saturday, 10:00 AM – 8:30 PM", contactLbl:"Contact",
+    testiEyebrow:"What Customers Say", testiTitle:"Our Customers' Experience",
+    testi1:"The sofa set quality is excellent and delivery was on time too. Paid online, no issues at all.",
+    testi2:"Went to buy a fridge, the staff explained everything really well. Paid cash right at the shop, very convenient.",
+    testi3:"We're old customers, ordered for the third time now. Fair prices and genuine products.",
+    footerDesc:"Lakhisarai, Bihar's trusted furniture, electronics and home appliances store.",
+    footCatHead:"Categories", footStoreHead:"Store", footConnectHead:"Connect",
+    footAddrTime:"Address & Timing", footPayOpt:"Payment Options", footEmail:"Email",
+    footRights:"© 2026 Ashok & Son's Traders. All rights reserved.", footMade:"Designed with care, in Lakhisarai.",
+    cartTitle:"Your Cart", total:"Total", checkoutBtn:"Checkout",
+    checkoutTitle:"Confirm Your Order", checkoutSub:"Fill in your details and choose a payment method",
+    fullNameLbl:"Full Name", fullNamePh:"e.g. Rakesh Kumar", mobileLbl:"Mobile Number", mobilePh:"10 digit number",
+    addressLbl:"Delivery Address", addressPh:"Home / shop address",
+    housePh:"House No. / Name", fullAddressPh:"Full Address (Mohalla / Street / City)", wardPh:"Ward Number", pincodePh:"Pincode", landmarkPh:"Landmark",
+    fullAddressRequired:"Please enter your full address.", pincodeNotServiceable:"⚠️ Online orders aren't available for this pincode yet — please call us",
+    noServiceHeading:"Online Order Not Available For This Pincode", noServiceMsg:"Online ordering hasn't started in this area yet. Please call us directly to confirm your order.",
+    waHeading:"🛒 New Order — Ashok & Son's Traders", waOrderId:"Order ID", waName:"Name", waMobile:"Mobile", waAddress:"Address", waProduct:"Product", waAmount:"Amount", waPayment:"Payment Status",
+    waStatusVerify:"Online Payment (Verification Pending)", waStatusOnlinePaid:"Online Payment", waStatusShop:"Pay at Shop (Pending)",
+    myOrdersBtn:"My Orders", myOrdersTitle:"My Orders", myOrdersMobileLbl:"Enter Your Mobile Number", myOrdersViewBtn:"View",
+    myOrdersEmpty:"No orders found for this mobile number.", myOrdersInvalidMobile:"Please enter a valid 10-digit mobile number.",
+    myOrdersLinkAfterOrder:"Track your order status here", myOrdersAddrLbl:"Delivery Address", myOrdersIdLbl:"Order ID",
+    statusPaidC:"Payment Received", statusPendingC:"Payment Pending", statusDeliveredC:"Delivered", statusVerifyC:"Verifying Payment",
+    wardLbl:"Ward", houseRequired:"Please enter your house number / name.", pincodeRequired:"Please enter a valid 6-digit pincode.",
+    bookNowBtn:"Book Now", getDirections:"Get Directions",
+    deliveryChargeApplies:"Delivery charge for this pincode: {amt}", deliveryFreeNote:"🎉 Free delivery for this pincode!",
+    payOnlineTitle2:"Online Payment", payOnlineNote:"Pay now via UPI, card or netbanking",
+    payShopTitle2:"Pay At Shop", payShopNote:"Pay when you collect it or at delivery",
+    placeOrderBtn:"Place Order", orderConfirmed:"Order Confirmed!",
+    thanksMsg:"Thank you! We'll get in touch with you shortly. Order ID:", okBtn:"Done",
+    emptyCart:"Your cart is empty.", emptyCartSub:"Add some products to get started.",
+    nameRequired:"Please enter your name.",
+    mobileRequired:"Please enter a valid 10-digit mobile number.",
+    addressRequired:"Please enter a delivery address.",
+    upiNotConfigured:"Online payment isn't available right now. Please choose 'Pay at Shop'.",
+    upiPayTitle:"Pay Via UPI", upiPaySub:"Choose your UPI app — it'll open automatically for payment",
+    upiOrderIdLbl:"Order ID", upiPayToLbl:"Pay To (UPI ID)", upiAmountLbl:"Amount",
+    upiOpenApp:"Opens the app to pay", upiAnyApp:"Any UPI App",
+    upiDesktopNote:"Note: these buttons open a UPI app on mobile. On a computer, copy the UPI ID and pay from your phone.",
+    upiPaidBtn:"I've Made The Payment", upiSwitchShop:"Switch To Pay At Shop Instead",
+    verifyingHeading:"Payment Being Verified", verifyingMsg:"Thanks! The shop will confirm your payment and reach out soon. Order ID:",
+    catLabels:{furniture:"FURNITURE", electronics:"ELECTRONICS", appliances:"APPLIANCES"},
+    prodAdd:"Add To Cart",
+    viewPhotosBtn:"View Photos", tabAllSub:"All",
+    spinHint:"Drag left-right on the photo with your finger or mouse to rotate it",
+    spin360Btn:"View In 360°"
+  }
+};
+
+let currentLang = 'en';
+
+const productsData = [
+  {id:1, cat:'furniture', name:{hi:'Sheesham Wood Sofa Set (3+1+1)', en:'Sheesham Wood Sofa Set (3+1+1)'}, desc:{hi:'Shudh Sheesham lakdi se banaya gaya majboot sofa set, aaram dayak cushioning aur lambe samay tak chalne wali finishing ke saath.', en:'Solid Sheesham wood sofa set with comfortable cushioning and a long-lasting finish.'}, price:32999, old:38999, badge:{hi:'BESTSELLER', en:'BESTSELLER'}, emoji:'🛋️'},
+  {id:2, cat:'furniture', name:{hi:'Queen Size Engineered Wood Bed', en:'Queen Size Engineered Wood Bed'}, desc:{hi:'Modern design wala Queen size bed, engineered wood se bana, storage ke saath.', en:'Modern-design Queen size bed made from engineered wood, with storage.'}, price:14499, old:null, badge:null, emoji:'🛏️'},
+  {id:3, cat:'furniture', name:{hi:'6-Seater Dining Table Set', en:'6-Seater Dining Table Set'}, desc:{hi:'6 logon ke liye poora dining set, majboot lakdi aur aaram dayak kursiyon ke saath.', en:'Complete 6-seater dining set with sturdy wood and comfortable chairs.'}, price:28999, old:33999, badge:{hi:'NAYA', en:'NEW'}, emoji:'🍽️'},
+  {id:4, cat:'furniture', name:{hi:'3-Door Steel Almirah', en:'3-Door Steel Wardrobe'}, desc:{hi:'3 darwaze wala steel almirah, lock aur locker facility ke saath.', en:'3-door steel wardrobe with lock and locker facility.'}, price:9299, old:null, badge:null, emoji:'🚪'},
+  {id:5, cat:'electronics', name:{hi:'43" Smart LED TV', en:'43" Smart LED TV'}, desc:{hi:'43 inch Full HD Smart LED TV, built-in apps aur behtareen sound quality ke saath.', en:'43-inch Full HD Smart LED TV with built-in apps and great sound quality.'}, price:22999, old:26999, badge:{hi:'OFFER', en:'OFFER'}, emoji:'📺'},
+  {id:6, cat:'electronics', name:{hi:'750W Mixer Grinder', en:'750W Mixer Grinder'}, desc:{hi:'750W powerful motor, 3 jars ke saath — pisai aur grinding dono ke liye behtareen.', en:'750W powerful motor with 3 jars — great for grinding and mixing.'}, price:2799, old:3299, badge:null, emoji:'🥤'},
+  {id:7, cat:'electronics', name:{hi:'1200mm Ceiling Fan', en:'1200mm Ceiling Fan'}, desc:{hi:'High speed 1200mm ceiling fan, kam bijli kharch aur shaant operation ke saath.', en:'High-speed 1200mm ceiling fan with low power consumption and quiet operation.'}, price:1899, old:null, badge:null, emoji:'🌀'},
+  {id:8, cat:'electronics', name:{hi:'Bluetooth Party Speaker', en:'Bluetooth Party Speaker'}, desc:{hi:'Powerful bass wala Bluetooth speaker, party aur ghar dono ke liye perfect.', en:'Bluetooth speaker with powerful bass, perfect for parties and home use.'}, price:4499, old:5299, badge:null, emoji:'🔊'},
+  {id:9, cat:'appliances', name:{hi:'190L Single Door Fridge', en:'190L Single Door Fridge'}, desc:{hi:'190 litre single door fridge, kam bijli kharch karne wali technology ke saath.', en:'190-litre single door fridge with energy-efficient technology.'}, price:15999, old:17999, badge:{hi:'BESTSELLER', en:'BESTSELLER'}, emoji:'🧊'},
+  {id:10, cat:'appliances', name:{hi:'7kg Front Load Washing Machine', en:'7kg Front Load Washing Machine'}, desc:{hi:'7kg capacity wali front load washing machine, kapdon ki achi dekhbhal ke saath.', en:'7kg capacity front-load washing machine that takes great care of your clothes.'}, price:19999, old:23499, badge:null, emoji:'🌀'},
+  {id:11, cat:'appliances', name:{hi:'1.5 Ton Split AC', en:'1.5 Ton Split AC'}, desc:{hi:'1.5 Ton split AC, tez cooling aur kam bijli bill ke saath.', en:'1.5 Ton split AC with fast cooling and low electricity bills.'}, price:33999, old:37999, badge:{hi:'OFFER', en:'OFFER'}, emoji:'❄️'},
+  {id:12, cat:'appliances', name:{hi:'Desert Air Cooler 50L', en:'Desert Air Cooler 50L'}, desc:{hi:'50 litre bada tank, garmi mein thandi hawa ke liye behtareen air cooler.', en:'Large 50-litre tank — great air cooler for cool air through the summer.'}, price:6499, old:null, badge:{hi:'NAYA', en:'NEW'}, emoji:'💨'},
+];
+
+let cart = {};
+let activeCat = 'all';
+
+// --- Security helpers ---
+function escapeHtml(str){
+  if(str === null || str === undefined) return '';
+  return String(str).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function sanitizeText(str, maxLen){
+  return String(str || '').replace(/[<>]/g, '').trim().slice(0, maxLen);
+}
+function isValidMobile(m){ return /^[6-9][0-9]{9}$/.test(m); }
+
+// --- Owner-configured UPI payment settings ---
+function getPaymentSettings(){
+  try{
+    const raw = localStorage.getItem('astPaymentSettings');
+    return raw ? JSON.parse(raw) : null;
+  }catch(e){ return null; }
+}
+
+// Apply owner-configured hero/showroom background + "New Arrival" card
+function applyHeroSettings(hs){
+  try{
+    if(!hs) return;
+    const visual = document.getElementById('heroVisual');
+    if(hs.bgImage){
+      visual.style.backgroundImage = `url('${hs.bgImage}')`;
+      visual.style.backgroundSize = 'cover';
+      visual.style.backgroundPosition = 'center';
+      const glyph = document.getElementById('heroGlyph');
+      if(glyph) glyph.style.display = 'none';
+    }
+    if(hs.arrivalBadge) document.getElementById('arrivalBadge').textContent = hs.arrivalBadge;
+    if(hs.arrivalName) document.getElementById('arrivalName').textContent = hs.arrivalName;
+    if(hs.arrivalPrice) document.getElementById('arrivalPrice').textContent = hs.arrivalPrice;
+    if(hs.arrivalImage){
+      const cardEl = document.querySelector('.hero-visual .cardfloat');
+      let thumb = document.getElementById('arrivalThumb');
+      if(!thumb){
+        thumb = document.createElement('img');
+        thumb.id = 'arrivalThumb';
+        thumb.style.cssText = 'width:100%; height:90px; object-fit:cover; border-radius:3px; margin-bottom:10px;';
+        cardEl.insertBefore(thumb, cardEl.firstChild);
+      }
+      thumb.src = hs.arrivalImage;
+    }
+  }catch(e){ /* ignore malformed data */ }
+}
+(function applyHeroSettingsFromCache(){
+  try{
+    const raw = localStorage.getItem('astHeroSettings');
+    if(raw) applyHeroSettings(JSON.parse(raw));
+  }catch(e){ /* ignore malformed data */ }
+})();
+cloudWatchSettings('astHeroSettings', applyHeroSettings);
+
+// Sync with the owner dashboard's product changes (add / edit / delete / HD photo)
+// This now runs both once at load (from the local cache) and live every time the
+// cloud copy changes (see cloudWatchAllProducts below), so a price/photo/description
+// edit from the owner dashboard shows up on this page without a manual refresh.
+function applyOwnerProductsSync(invData){
+  try{
+    if(!Array.isArray(invData) || !invData.length) return; // cloud not seeded yet (owner dashboard never opened) — keep defaults
+    const trackedIds = new Set([1,3,5,9,10,11]); // products the owner dashboard manages by default
+    const invById = {};
+    invData.forEach(i => invById[i.id] = i);
+
+    // Remove products the owner deleted from inventory
+    for(let i = productsData.length - 1; i >= 0; i--){
+      const p = productsData[i];
+      if(trackedIds.has(p.id) && !invById[p.id]) productsData.splice(i, 1);
+    }
+    // Apply edits (name, price, qty-based availability, HD photos, 360° spin) to existing products
+    productsData.forEach(p => {
+      const upd = invById[p.id];
+      if(!upd) return;
+      p.name = upd.name; p.cat = upd.cat; p.price = upd.price;
+      p.desc = upd.desc || p.desc || null;
+      p.subcat = upd.subcat || '';
+      p.pincodeDelivery = Array.isArray(upd.pincodeDelivery) ? upd.pincodeDelivery : [];
+      if(upd.img) p.img = upd.img;
+      if(Array.isArray(upd.images) && upd.images.length) p.images = upd.images;
+      p.spin360 = Array.isArray(upd.spin360) ? upd.spin360 : [];
+    });
+    // Add brand-new products the owner created from the dashboard
+    invData.forEach(item => {
+      if(item.id < 100) return; // not a new dashboard product
+      if(productsData.some(p => p.id === item.id)) return;
+      productsData.push({
+        id: item.id, cat: item.cat, subcat: item.subcat || '', name: item.name, desc: item.desc || null, price: item.price,
+        old: null, badge: {hi:'NAYA', en:'NEW'}, emoji: item.icon || '🛍️', img: item.img || null,
+        images: Array.isArray(item.images) ? item.images : (item.img ? [item.img] : []),
+        spin360: Array.isArray(item.spin360) ? item.spin360 : [],
+        pincodeDelivery: Array.isArray(item.pincodeDelivery) ? item.pincodeDelivery : []
+      });
+    });
+  }catch(e){ /* ignore malformed data */ }
+}
+(function syncOwnerProductsFromCache(){
+  try{
+    const raw = localStorage.getItem('astProducts');
+    if(raw) applyOwnerProductsSync(JSON.parse(raw));
+  }catch(e){ /* ignore malformed data */ }
+})();
+cloudWatchAllProducts(function(products){
+  applyOwnerProductsSync(products);
+  renderProducts(activeCat);
+});
+// Keep these two settings' local cache fresh too — they're read fresh from
+// localStorage at checkout time (delivery charge + UPI ID), so no extra re-render is needed here.
+cloudWatchSettings('astDeliveryRules', function(){});
+cloudWatchSettings('astPaymentSettings', function(){});
+
+// Sync subcategories the owner defined per category
+let subcatsData = { furniture:[], electronics:[], appliances:[] };
+(function syncSubcats(){
+  try{
+    const raw = localStorage.getItem('astSubcategories');
+    if(raw) subcatsData = Object.assign(subcatsData, JSON.parse(raw));
+  }catch(e){ /* ignore malformed data */ }
+})();
+cloudWatchSettings('astSubcategories', function(val){
+  subcatsData = Object.assign({furniture:[],electronics:[],appliances:[]}, val);
+  renderProducts(activeCat);
+});
+
+function applyLang(){
+  const t = dict[currentLang];
+  document.documentElement.lang = currentLang;
+  document.getElementById('btnHi').classList.toggle('active', currentLang==='hi');
+  document.getElementById('btnEn').classList.toggle('active', currentLang==='en');
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-ph');
+    if(t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+  });
+  renderProducts(activeCat);
+  updateCartUI();
+}
+function setLang(lang){
+  currentLang = lang;
+  applyLang();
+}
+
+let activeSubcat = '';
+
+// --- Pincode-wise delivery charge ---
+// Settings → "Serviceable Pincode & Delivery Charge" sets the DEFAULT delivery charge for each pincode.
+// A specific product can override that default for a specific pincode when added/edited from the dashboard
+// (item.pincodeDelivery = [{pincode, charge}, ...]). If the cart has items with an override for the
+// customer's pincode, the highest override among them is used instead of the default.
+const USER_PINCODE_KEY = 'astUserPincode';
+function getSavedUserPincode(){
+  try{ return (localStorage.getItem(USER_PINCODE_KEY) || '').trim(); }catch(e){ return ''; }
+}
+function saveUserPincode(pin){
+  try{ if(/^\d{6}$/.test(pin)) localStorage.setItem(USER_PINCODE_KEY, pin); }catch(e){ /* storage unavailable */ }
+}
+function getEffectiveDeliveryCharge(pincode, cartIds){
+  const ids = cartIds || Object.keys(cart);
+  const defaultCharge = getDeliveryCharge(pincode);
+  if(!ids.length) return defaultCharge;
+  // Delivery is charged once per order, like Flipkart/Myntra — not added up per item.
+  // Each item uses its own pincode-specific charge if the owner set one for that
+  // product, otherwise the pincode's default charge; the order pays the highest
+  // of those across all items in the cart.
+  let maxCharge = null;
+  ids.forEach(id => {
+    const p = productsData.find(x => x.id == id);
+    let itemCharge = defaultCharge;
+    if(p && Array.isArray(p.pincodeDelivery)){
+      const rule = p.pincodeDelivery.find(r => r.pincode === pincode);
+      if(rule && rule.charge != null && rule.charge !== '') itemCharge = Number(rule.charge);
+    }
+    if(maxCharge === null || itemCharge > maxCharge) maxCharge = itemCharge;
+  });
+  return maxCharge !== null ? maxCharge : defaultCharge;
+}
+
+function renderProducts(filter){
+  activeCat = filter;
+  activeSubcat = '';
+  const t = dict[currentLang];
+  renderSubcatTabs();
+  renderProductGrid();
+  document.querySelectorAll('.prod-tab[data-cat]').forEach(tb => tb.classList.toggle('active', tb.dataset.cat === filter));
+}
+
+function renderSubcatTabs(){
+  const box = document.getElementById('subcatTabs');
+  const list = (activeCat !== 'all' && subcatsData[activeCat]) ? subcatsData[activeCat] : [];
+  if(!list.length){ box.style.display = 'none'; box.innerHTML = ''; return; }
+  const t = dict[currentLang];
+  box.style.display = 'flex';
+  box.innerHTML = `<div class="prod-tab sub-tab active" data-sub="">${t.tabAllSub}</div>` +
+    list.map(s => `<div class="prod-tab sub-tab" data-sub="${escapeHtml(s)}">${escapeHtml(s)}</div>`).join('');
+}
+document.getElementById('subcatTabs').addEventListener('click', e => {
+  const el = e.target.closest('.sub-tab');
+  if(!el) return;
+  activeSubcat = el.dataset.sub || '';
+  document.querySelectorAll('.sub-tab').forEach(tb => tb.classList.toggle('active', tb === el));
+  renderProductGrid();
+});
+
+function renderProductGrid(){
+  const t = dict[currentLang];
+  const grid = document.getElementById('prodGrid');
+  grid.innerHTML = '';
+  productsData
+    .filter(p => activeCat==='all' || p.cat===activeCat)
+    .filter(p => !activeSubcat || p.subcat === activeSubcat)
+    .forEach(p => {
+    const hasGallery = (p.images && p.images.length > 1) || (p.spin360 && p.spin360.length > 0);
+    const card = document.createElement('div');
+    card.className = 'prod-card';
+    card.innerHTML = `
+      <div class="prod-img" ${hasGallery ? `onclick="openProductModal(${p.id})" style="cursor:pointer;"` : ''}>
+        ${p.badge ? `<div class="prod-badge">${escapeHtml(p.badge[currentLang])}</div>` : ''}
+        ${p.spin360 && p.spin360.length ? `<div class="spin-badge">🔄 360°</div>` : ''}
+        ${(p.img || (p.images && p.images[0])) ? `<img src="${escapeHtml(p.img || p.images[0])}" alt="${escapeHtml(p.name[currentLang])}" style="width:100%; height:100%; object-fit:cover;">` : `<span style="font-size:44px;">${escapeHtml(p.emoji)}</span>`}
+      </div>
+      <div class="prod-body">
+        <div class="prod-cat">${escapeHtml(t.catLabels[p.cat])}${p.subcat ? ' • ' + escapeHtml(p.subcat) : ''}</div>
+        <div class="prod-name" ${hasGallery ? `onclick="openProductModal(${p.id})" style="cursor:pointer;"` : ''}>${escapeHtml(p.name[currentLang])}</div>
+        <div class="prod-price-row">
+          <div class="prod-price">₹${p.price.toLocaleString('en-IN')}</div>
+          ${p.old ? `<div class="prod-old">₹${p.old.toLocaleString('en-IN')}</div>` : ''}
+        </div>
+        ${hasGallery ? `<button class="prod-add" style="background:transparent; color:var(--espresso); border:1px solid var(--line); margin-bottom:8px;" onclick="openProductModal(${p.id})">${t.viewPhotosBtn}</button>` : ''}
+        <button class="prod-add" onclick="addToCart(${p.id})">${t.prodAdd}</button>
+        <button class="prod-add" style="background:var(--rust); color:#fff; border-color:var(--rust); margin-top:8px;" onclick="bookNow(${p.id})">${t.bookNowBtn}</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+document.getElementById('prodTabs').addEventListener('click', e => {
+  if(!e.target.classList.contains('prod-tab') || !e.target.dataset.cat) return;
+  renderProducts(e.target.dataset.cat);
+});
+
+function addToCart(id){
+  cart[id] = (cart[id]||0) + 1;
+  updateCartUI();
+  openCart();
+}
+
+// --- Product detail modal: photo gallery + 360° spin viewer ---
+let modalProduct = null;
+let modalImages = [];
+let spinMode = false;
+let spinIndex = 0;
+let spinDragStartX = 0;
+let spinDragging = false;
+
+function openProductModal(id){
+  const p = productsData.find(x => x.id === id);
+  if(!p) return;
+  modalProduct = p;
+  modalImages = (p.images && p.images.length) ? p.images : (p.img ? [p.img] : []);
+  spinMode = false;
+  spinIndex = 0;
+  document.getElementById('pmodalName').textContent = p.name[currentLang];
+  document.getElementById('pmodalPrice').textContent = '₹' + p.price.toLocaleString('en-IN');
+  const descEl = document.getElementById('pmodalDesc');
+  const descText = p.desc ? (p.desc[currentLang] || p.desc.hi || '') : '';
+  if(descText){ descEl.textContent = descText; descEl.style.display = 'block'; }
+  else { descEl.textContent = ''; descEl.style.display = 'none'; }
+  renderModalThumbs();
+  showModalImage(0);
+  const hasSpin = p.spin360 && p.spin360.length > 1;
+  document.getElementById('pmodalSpinBtn').style.display = hasSpin ? 'inline-block' : 'none';
+  document.getElementById('pmodalSpinBtn').classList.remove('active');
+  document.getElementById('pmodalSpinHint').style.display = 'none';
+  document.getElementById('pmodalOverlay').classList.add('show');
+}
+function closeProductModal(){
+  document.getElementById('pmodalOverlay').classList.remove('show');
+  modalProduct = null;
+}
+function renderModalThumbs(){
+  const box = document.getElementById('pmodalThumbs');
+  if(spinMode || modalImages.length < 2){ box.innerHTML = ''; return; }
+  box.innerHTML = modalImages.map((src, idx) => `
+    <div class="pmodal-thumb ${idx===0?'active':''}" onclick="showModalImage(${idx})"><img src="${escapeHtml(src)}" alt=""></div>
+  `).join('');
+}
+function showModalImage(idx){
+  if(!modalImages[idx]) return;
+  document.getElementById('pmodalImg').src = modalImages[idx];
+  document.querySelectorAll('.pmodal-thumb').forEach((el,i) => el.classList.toggle('active', i===idx));
+}
+function toggle360Mode(){
+  if(!modalProduct) return;
+  spinMode = !spinMode;
+  const btn = document.getElementById('pmodalSpinBtn');
+  btn.classList.toggle('active', spinMode);
+  document.getElementById('pmodalSpinHint').style.display = spinMode ? 'block' : 'none';
+  if(spinMode){
+    spinIndex = 0;
+    document.getElementById('pmodalImg').src = modalProduct.spin360[0];
+    document.getElementById('pmodalThumbs').innerHTML = '';
+  } else {
+    renderModalThumbs();
+    showModalImage(0);
+  }
+}
+function addToCartFromModal(){
+  if(!modalProduct) return;
+  addToCart(modalProduct.id);
+  closeProductModal();
+}
+
+// Drag-to-rotate for the 360° viewer (mouse + touch)
+const pmodalMainEl = document.getElementById('pmodalMain');
+function spinStart(clientX){
+  if(!spinMode) return;
+  spinDragging = true;
+  spinDragStartX = clientX;
+}
+function spinMove(clientX){
+  if(!spinMode || !spinDragging || !modalProduct) return;
+  const frames = modalProduct.spin360;
+  const delta = clientX - spinDragStartX;
+  const step = 12; // px per frame — smaller = more sensitive
+  if(Math.abs(delta) >= step){
+    const framesToMove = Math.trunc(delta / step);
+    spinIndex = ((spinIndex - framesToMove) % frames.length + frames.length) % frames.length;
+    document.getElementById('pmodalImg').src = frames[spinIndex];
+    spinDragStartX = clientX;
+  }
+}
+function spinEnd(){ spinDragging = false; }
+pmodalMainEl.addEventListener('mousedown', e => spinStart(e.clientX));
+window.addEventListener('mousemove', e => spinMove(e.clientX));
+window.addEventListener('mouseup', spinEnd);
+pmodalMainEl.addEventListener('touchstart', e => spinStart(e.touches[0].clientX), {passive:true});
+pmodalMainEl.addEventListener('touchmove', e => { spinMove(e.touches[0].clientX); if(spinMode) e.preventDefault(); }, {passive:false});
+pmodalMainEl.addEventListener('touchend', spinEnd);
+document.getElementById('pmodalOverlay').addEventListener('click', e => {
+  if(e.target.id === 'pmodalOverlay') closeProductModal();
+});
+function changeQty(id, delta){
+  cart[id] = (cart[id]||0) + delta;
+  if(cart[id] <= 0) delete cart[id];
+  updateCartUI();
+}
+function updateCartUI(){
+  const t = dict[currentLang];
+  const body = document.getElementById('cartBody');
+  const ids = Object.keys(cart);
+  let total = 0, count = 0;
+  if(ids.length === 0){
+    body.innerHTML = `<div class="cart-empty">${t.emptyCart}<br>${t.emptyCartSub}</div>`;
+    document.getElementById('drawerFoot').style.display = 'none';
+  } else {
+    body.innerHTML = '';
+    ids.forEach(id => {
+      const p = productsData.find(x => x.id == id);
+      const qty = cart[id];
+      const unitPrice = p.price;
+      total += unitPrice * qty;
+      count += qty;
+      const row = document.createElement('div');
+      row.className = 'cart-item';
+      row.innerHTML = `
+        <div class="thumb" style="display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden;">${p.img ? `<img src="${escapeHtml(p.img)}" alt="" style="width:100%;height:100%;object-fit:cover;">` : escapeHtml(p.emoji)}</div>
+        <div style="flex:1;">
+          <div class="ci-name">${escapeHtml(p.name[currentLang])}</div>
+          <div class="ci-price">₹${unitPrice.toLocaleString('en-IN')}</div>
+          <div class="qty-row">
+            <button class="qty-btn" onclick="changeQty(${id},-1)">−</button>
+            <span style="font-size:13px; font-weight:700;">${qty}</span>
+            <button class="qty-btn" onclick="changeQty(${id},1)">+</button>
+          </div>
+        </div>
+      `;
+      body.appendChild(row);
+    });
+    document.getElementById('drawerFoot').style.display = 'block';
+  }
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('cartTotal').textContent = '₹' + total.toLocaleString('en-IN');
+  const pinEl = document.getElementById('pincodeField');
+  const pin = pinEl ? pinEl.value.trim() : '';
+  const delivery = /^\d{6}$/.test(pin) ? getEffectiveDeliveryCharge(pin) : 0;
+  document.getElementById('modalTotal').textContent = '₹' + (total + delivery).toLocaleString('en-IN');
+}
+
+function openCart(){ document.getElementById('drawer').classList.add('show'); document.getElementById('overlay').classList.add('show'); }
+function closeCart(){ document.getElementById('drawer').classList.remove('show'); document.getElementById('overlay').classList.remove('show'); }
+
+// --- Customer-facing "My Orders" tracker ---
+// Lets a customer look up their own orders (by mobile number) and see live status
+// (Pending / Verifying / Paid / Delivered). Reads the same 'astOrders' localStorage
+// data the owner dashboard writes to, so status updates the owner makes are reflected
+// here automatically (via the 'storage' event + astOrdersPing nudge).
+function getSavedOrderMobile(){
+  try{ return localStorage.getItem('astLastOrderMobile') || ''; }catch(e){ return ''; }
+}
+function saveOrderMobile(mobile){
+  try{ localStorage.setItem('astLastOrderMobile', mobile); }catch(e){}
+}
+let myOrdersUnsub = null; // active Firestore live-listener for the currently looked-up mobile number
+function openMyOrders(prefillMobile){
+  const input = document.getElementById('myOrdersMobileInput');
+  const saved = prefillMobile || getSavedOrderMobile();
+  if(saved) input.value = saved;
+  document.getElementById('myOrdersDrawer').classList.add('show');
+  document.getElementById('myOrdersOverlay').classList.add('show');
+  if(saved && isValidMobile(saved)) lookupMyOrders();
+}
+function closeMyOrders(){
+  document.getElementById('myOrdersDrawer').classList.remove('show');
+  document.getElementById('myOrdersOverlay').classList.remove('show');
+  if(myOrdersUnsub){ myOrdersUnsub(); myOrdersUnsub = null; } // stop listening once the drawer is closed
+}
+function myOrderStatusInfo(status){
+  const t = dict[currentLang];
+  if(status === 'paid') return {cls:'paid', label: t.statusPaidC};
+  if(status === 'verify') return {cls:'pending', label: t.statusVerifyC};
+  if(status === 'delivered') return {cls:'delivered', label: t.statusDeliveredC};
+  return {cls:'pending', label: t.statusPendingC};
+}
+function renderMyOrdersList(orders){
+  const t = dict[currentLang];
+  const listEl = document.getElementById('myOrdersList');
+  if(!orders.length){
+    listEl.innerHTML = `<p style="color:#8C7E67; font-size:13px; text-align:center; padding:30px 0;">${t.myOrdersEmpty}</p>`;
+    return;
+  }
+  orders.sort((a,b) => new Date(b.placedAt||0) - new Date(a.placedAt||0));
+  listEl.innerHTML = orders.map(o => {
+    const info = myOrderStatusInfo(o.status);
+    const prodText = (o.prod && typeof o.prod === 'object') ? (o.prod[currentLang] || o.prod.hi) : o.prod;
+    const badgeBg = info.cls === 'paid' ? '#DFF0E5' : info.cls === 'delivered' ? '#E4EEFC' : '#FCE8E4';
+    const badgeColor = info.cls === 'paid' ? 'var(--green,#2F6B4F)' : info.cls === 'delivered' ? '#2E5FA3' : 'var(--rust)';
+    return `
+    <div style="border:1px solid var(--line); border-radius:6px; padding:14px 16px; margin-bottom:12px; background:#fff;">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+        <span style="font-size:11.5px; font-weight:700; color:#8A5A1E;">${t.myOrdersIdLbl}: ${escapeHtml(o.id)}</span>
+        <span style="font-size:11px; font-weight:800; padding:4px 10px; border-radius:999px; background:${badgeBg}; color:${badgeColor}; white-space:nowrap;">${info.label}</span>
+      </div>
+      <div style="font-family:'Fraunces',serif; font-size:14.5px; color:var(--espresso); margin-top:8px;">${escapeHtml(prodText)}</div>
+      <div style="font-size:13px; font-weight:800; color:var(--rust); margin-top:4px;">₹${Number(o.amount||0).toLocaleString('en-IN')}</div>
+      <div style="font-size:12px; color:#8C7E67; margin-top:8px; line-height:1.5;"><b>${t.myOrdersAddrLbl}:</b> ${escapeHtml(o.address||'')}${o.pincode ? ' — '+escapeHtml(o.pincode) : ''}</div>
+    </div>`;
+  }).join('');
+}
+function lookupMyOrders(){
+  const t = dict[currentLang];
+  const input = document.getElementById('myOrdersMobileInput');
+  const mobile = input.value.trim();
+  const listEl = document.getElementById('myOrdersList');
+  if(!isValidMobile(mobile)){
+    listEl.innerHTML = `<p style="color:var(--rust); font-size:13px; font-weight:700; padding:10px 0;">${t.myOrdersInvalidMobile}</p>`;
+    return;
+  }
+  saveOrderMobile(mobile);
+  if(myOrdersUnsub){ myOrdersUnsub(); myOrdersUnsub = null; }
+  // Live subscription: jaise hi owner status "Paid" karega, yeh list turant khud update ho jaayegi,
+  // customer ko dobara refresh karne ki zaroorat nahi.
+  myOrdersUnsub = cloudWatchOrdersByMobile(mobile, function(orders){
+    renderMyOrdersList(orders);
+  });
+}
+
+function openCheckout(){
+  if(Object.keys(cart).length === 0) return;
+  document.getElementById('checkoutOverlay').classList.add('show');
+  document.getElementById('checkoutForm').style.display='block';
+  document.getElementById('upiPayBox').style.display='none';
+  document.getElementById('successBox').style.display='none';
+  document.getElementById('formError').style.display='none';
+  document.getElementById('deliveryChargeNote').style.display='none';
+  prefillCheckoutForm();
+  updateCartUI();
+}
+function bookNow(id){
+  cart[id] = cart[id] || 1;
+  updateCartUI();
+  openCheckout();
+}
+function bookNowFromModal(){
+  if(!modalProduct) return;
+  bookNow(modalProduct.id);
+  closeProductModal();
+}
+function closeCheckout(){
+  document.getElementById('checkoutOverlay').classList.remove('show');
+  if(document.getElementById('successBox').style.display === 'block'){
+    cart = {}; updateCartUI(); closeCart();
+    ['houseField','fullAddressField','wardField','pincodeField','landmarkField'].forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+    document.getElementById('deliveryChargeNote').style.display='none';
+  }
+}
+let selectedPay = 'online';
+document.getElementById('payOptions').addEventListener('click', e => {
+  const opt = e.target.closest('.pay-opt');
+  if(!opt) return;
+  document.querySelectorAll('#payOptions .pay-opt').forEach(o => o.classList.remove('selected'));
+  opt.classList.add('selected');
+  selectedPay = opt.dataset.pay;
+});
+
+let pendingOrder = null; // holds order details while UPI payment is in progress
+let selectedUpiApp = null;
+
+document.getElementById('upiAppOptions').addEventListener('click', e => {
+  const opt = e.target.closest('.pay-opt');
+  if(!opt) return;
+  document.querySelectorAll('#upiAppOptions .pay-opt').forEach(o => o.classList.remove('selected'));
+  opt.classList.add('selected');
+  selectedUpiApp = opt.dataset.upi;
+  launchUpiApp(selectedUpiApp);
+});
+
+function buildUpiLink(scheme, params){
+  const q = Object.entries(params).map(([k,v]) => `${k}=${encodeURIComponent(v)}`).join('&');
+  return `${scheme}${q}`;
+}
+function launchUpiApp(app){
+  if(!pendingOrder) return;
+  const { upiId, payeeName, amount, orderId } = pendingOrder;
+  const params = { pa: upiId, pn: payeeName, am: amount, cu: 'INR', tn: `Order ${orderId}` };
+  let link;
+  if(app === 'gpay') link = buildUpiLink('tez://upi/pay?', params);
+  else if(app === 'phonepe') link = buildUpiLink('phonepe://pay?', params);
+  else if(app === 'paytm') link = buildUpiLink('paytmmp://pay?', params);
+  else link = buildUpiLink('upi://pay?', params);
+  // Attempt the app-specific deep link first; browsers on desktop will simply fail silently.
+  window.location.href = link;
+  // Fallback to the generic upi:// intent shortly after, in case the specific app isn't installed.
+  setTimeout(() => {
+    if(document.hidden) return;
+    window.location.href = buildUpiLink('upi://pay?', params);
+  }, 900);
+}
+
+function validateCheckoutFields(){
+  const t = dict[currentLang];
+  const name = sanitizeText(document.getElementById('nameField').value, 60);
+  const mobile = document.getElementById('mobileField').value.trim();
+  const house = sanitizeText(document.getElementById('houseField').value, 80);
+  const fullAddress = sanitizeText(document.getElementById('fullAddressField').value, 200);
+  const ward = sanitizeText(document.getElementById('wardField').value, 20);
+  const pincode = document.getElementById('pincodeField').value.trim();
+  const landmark = sanitizeText(document.getElementById('landmarkField').value, 80);
+  const errBox = document.getElementById('formError');
+  errBox.style.display = 'none';
+  if(!name){ errBox.textContent = t.nameRequired; errBox.style.display = 'block'; return null; }
+  if(!isValidMobile(mobile)){ errBox.textContent = t.mobileRequired; errBox.style.display = 'block'; return null; }
+  if(!house){ errBox.textContent = t.houseRequired; errBox.style.display = 'block'; return null; }
+  if(!fullAddress){ errBox.textContent = t.fullAddressRequired; errBox.style.display = 'block'; return null; }
+  if(!/^\d{6}$/.test(pincode)){ errBox.textContent = t.pincodeRequired; errBox.style.display = 'block'; return null; }
+  if(!isPincodeServiceable(pincode)){ showNoServicePopup(); return null; }
+  const addressParts = [house, fullAddress, ward ? (t.wardLbl + ' ' + ward) : '', landmark, 'PIN ' + pincode].filter(Boolean);
+  const address = addressParts.join(', ');
+  const deliveryCharge = getEffectiveDeliveryCharge(pincode);
+  return { name, mobile, address, pincode, deliveryCharge, house, fullAddress, ward, landmark };
+}
+
+// --- Remember customer's details so they don't have to type them again next time ---
+const SAVED_INFO_KEY = 'astSavedCustomerInfo';
+function saveCustomerInfo(info){
+  try{
+    localStorage.setItem(SAVED_INFO_KEY, JSON.stringify({
+      name: info.name, mobile: info.mobile, house: info.house,
+      fullAddress: info.fullAddress, ward: info.ward, pincode: info.pincode, landmark: info.landmark
+    }));
+    if(info.mobile) localStorage.setItem('astLastOrderMobile', info.mobile); // lets "My Orders" auto-prefill
+  }catch(e){ /* storage unavailable */ }
+}
+function loadCustomerInfo(){
+  try{ return JSON.parse(localStorage.getItem(SAVED_INFO_KEY) || 'null'); }catch(e){ return null; }
+}
+function prefillCheckoutForm(){
+  const info = loadCustomerInfo();
+  if(!info) return;
+  const setVal = (id, val) => { const el = document.getElementById(id); if(el && val) el.value = val; };
+  setVal('nameField', info.name);
+  setVal('mobileField', info.mobile);
+  setVal('houseField', info.house);
+  setVal('fullAddressField', info.fullAddress);
+  setVal('wardField', info.ward);
+  setVal('pincodeField', info.pincode);
+  setVal('landmarkField', info.landmark);
+  // Trigger the pincode field's own input handler so delivery charge/serviceability note updates too
+  if(info.pincode){ document.getElementById('pincodeField').dispatchEvent(new Event('input')); }
+}
+
+function getDeliveryRules(){
+  try{ return JSON.parse(localStorage.getItem('astDeliveryRules') || '{}'); }catch(e){ return {}; }
+}
+function findPincodeRule(pincode){
+  const data = getDeliveryRules();
+  const rules = Array.isArray(data.rules) ? data.rules : [];
+  return rules.find(r => r.pincode === pincode) || null;
+}
+function isPincodeServiceable(pincode){
+  return !!findPincodeRule(pincode);
+}
+function getDeliveryCharge(pincode){
+  const match = findPincodeRule(pincode);
+  return match ? (Number(match.charge) || 0) : 0;
+}
+function getWhatsAppNumber(){
+  try{
+    const s = JSON.parse(localStorage.getItem('astStoreSettings') || '{}');
+    return (s.whatsappNumber || '919000000000').replace(/\D/g,'');
+  }catch(e){ return '919000000000'; }
+}
+function showNoServicePopup(){
+  const num = getWhatsAppNumber();
+  document.getElementById('noServiceCallBtn').href = 'tel:+' + num;
+  document.getElementById('noServiceWaBtn').href = 'https://wa.me/' + num;
+  document.getElementById('noServiceOverlay').classList.add('show');
+}
+function closeNoServicePopup(){
+  document.getElementById('noServiceOverlay').classList.remove('show');
+}
+document.getElementById('pincodeField').addEventListener('input', function(){
+  const t = dict[currentLang];
+  const note = document.getElementById('deliveryChargeNote');
+  const pin = this.value.trim();
+  if(!/^\d{6}$/.test(pin)){ note.style.display = 'none'; updateCartUI(); return; }
+  note.style.display = 'block';
+  if(!isPincodeServiceable(pin)){
+    note.style.background = '#FCE8E4'; note.style.color = 'var(--rust)';
+    note.textContent = t.pincodeNotServiceable;
+    updateCartUI();
+    return;
+  }
+  const charge = getEffectiveDeliveryCharge(pin);
+  if(charge > 0){
+    note.style.background = '#FDEBD3'; note.style.color = '#8A5A1E';
+    note.textContent = t.deliveryChargeApplies.replace('{amt}', '₹'+charge.toLocaleString('en-IN'));
+  } else {
+    note.style.background = '#DFF0E5'; note.style.color = 'var(--green,#2F6B4F)';
+    note.textContent = t.deliveryFreeNote;
+  }
+  saveUserPincode(pin);
+  updateCartUI();
+});
+
+function placeOrder(){
+  const t = dict[currentLang];
+  const fields = validateCheckoutFields();
+  if(!fields) return;
+  const { name, mobile, address, pincode, deliveryCharge } = fields;
+  saveUserPincode(pincode);
+  saveCustomerInfo(fields);
+
+  let total = 0;
+  const items = Object.keys(cart).map(id => {
+    const p = productsData.find(x => x.id == id);
+    total += p.price * cart[id];
+    return {id: p.id, name: p.name, qty: cart[id], price: p.price};
+  });
+  total += deliveryCharge;
+  const orderId = 'AST' + Math.floor(10000 + Math.random()*89999);
+  const initials = name.split(' ').filter(Boolean).map(w=>w[0]).join('').slice(0,2).toUpperCase() || 'CU';
+  const prodName = items.length === 1 ? items[0].name : {hi: items.map(i=>i.name.hi).join(', '), en: items.map(i=>i.name.en).join(', ')};
+
+  if(selectedPay === 'online'){
+    const settings = getPaymentSettings();
+    if(!settings || !settings.upiId){
+      const errBox = document.getElementById('formError');
+      errBox.textContent = t.upiNotConfigured;
+      errBox.style.display = 'block';
+      return;
+    }
+    pendingOrder = {
+      orderId, name, initials, mobile, address, pincode, deliveryCharge, prodName, items, total,
+      upiId: settings.upiId, payeeName: settings.payeeName || 'Ashok & Son\'s Traders'
+    };
+    document.getElementById('checkoutForm').style.display = 'none';
+    document.getElementById('upiPayBox').style.display = 'block';
+    document.getElementById('upiOrderId').textContent = orderId;
+    document.getElementById('upiIdShown').textContent = settings.upiId;
+    document.getElementById('upiAmountShown').textContent = '₹' + total.toLocaleString('en-IN');
+    document.querySelectorAll('#upiAppOptions .pay-opt').forEach(o => o.classList.remove('selected'));
+    return;
+  }
+
+  saveOrderRecord({
+    id: orderId, cust: name, init: initials, mobile, address, pincode, deliveryCharge,
+    prod: prodName, items, pay: 'shop', amount: total, status: 'pending',
+    placedAt: new Date().toISOString()
+  });
+  showSuccess(orderId, false);
+}
+
+function confirmUpiPaid(){
+  if(!pendingOrder) return;
+  const o = pendingOrder;
+  saveOrderRecord({
+    id: o.orderId, cust: o.name, init: o.initials, mobile: o.mobile, address: o.address, pincode: o.pincode, deliveryCharge: o.deliveryCharge,
+    prod: o.prodName, items: o.items, pay: 'online', amount: o.total,
+    status: 'verify', placedAt: new Date().toISOString()
+  });
+  document.getElementById('upiPayBox').style.display = 'none';
+  showSuccess(o.orderId, true);
+  pendingOrder = null;
+}
+
+function switchToPayAtShop(){
+  if(!pendingOrder) return;
+  const o = pendingOrder;
+  saveOrderRecord({
+    id: o.orderId, cust: o.name, init: o.initials, mobile: o.mobile, address: o.address, pincode: o.pincode, deliveryCharge: o.deliveryCharge,
+    prod: o.prodName, items: o.items, pay: 'shop', amount: o.total,
+    status: 'pending', placedAt: new Date().toISOString()
+  });
+  document.getElementById('upiPayBox').style.display = 'none';
+  showSuccess(o.orderId, false);
+  pendingOrder = null;
+}
+
+function saveOrderRecord(newOrder){
+  try{
+    const raw = localStorage.getItem('astOrders');
+    const orders = raw ? JSON.parse(raw) : [];
+    orders.unshift(newOrder);
+    localStorage.setItem('astOrders', JSON.stringify(orders));
+    localStorage.setItem('astOrdersPing', Date.now().toString()); // nudges an open owner dashboard tab to refresh
+  }catch(e){ /* storage unavailable */ }
+  cloudSaveOrder(newOrder); // pushes the order live to the owner dashboard, on any device
+  sendOrderToWhatsApp(newOrder);
+}
+
+function sendOrderToWhatsApp(o){
+  const t = dict[currentLang];
+  const statusText = o.status === 'verify' ? t.waStatusVerify : (o.pay === 'online' ? t.waStatusOnlinePaid : t.waStatusShop);
+  const prodText = (o.prod && typeof o.prod === 'object') ? o.prod[currentLang] : o.prod;
+  const lines = [
+    t.waHeading,
+    t.waOrderId + ': ' + o.id,
+    t.waName + ': ' + o.cust,
+    t.waMobile + ': ' + o.mobile,
+    t.waAddress + ': ' + o.address,
+    t.waProduct + ': ' + prodText,
+    t.waAmount + ': ₹' + Number(o.amount||0).toLocaleString('en-IN'),
+    t.waPayment + ': ' + statusText
+  ];
+  const num = getWhatsAppNumber();
+  const url = 'https://wa.me/' + num + '?text=' + encodeURIComponent(lines.join('\n'));
+  window.open(url, '_blank', 'noopener');
+}
+
+function showSuccess(orderId, awaitingVerification){
+  const t = dict[currentLang];
+  const box = document.getElementById('successBox');
+  box.style.display = 'block';
+  document.getElementById('orderId').textContent = orderId;
+  document.getElementById('successHeading').textContent = awaitingVerification ? t.verifyingHeading : t.orderConfirmed;
+  document.getElementById('successMsg').textContent = awaitingVerification ? t.verifyingMsg : t.thanksMsg;
+}
+
+// --- Store location map (owner sets an exact Google Maps link in Settings) ---
+const STORE_SETTINGS_KEY = 'astStoreSettings';
+function loadStoreSettings(){
+  try{ return JSON.parse(localStorage.getItem(STORE_SETTINGS_KEY) || '{}'); }catch(e){ return {}; }
+}
+function toEmbedUrl(link){
+  if(!link) return 'https://www.google.com/maps?q=' + encodeURIComponent('Station Road, Lakhisarai, Bihar 811311') + '&output=embed';
+  // If it's already a plain search/place query, just append output=embed; otherwise wrap it in a search embed using the link as the query.
+  if(link.includes('output=embed')) return link;
+  if(link.includes('/maps/embed')) return link;
+  return 'https://www.google.com/maps?q=' + encodeURIComponent(link) + '&output=embed';
+}
+function renderMap(){
+  const s = loadStoreSettings();
+  const link = (s.mapLink || '').trim();
+  document.getElementById('mapIframe').src = toEmbedUrl(link);
+  document.getElementById('mapDirectionsBtn').href = link || ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Station Road, Lakhisarai, Bihar 811311'));
+}
+window.addEventListener('storage', function(e){
+  if(e.key === STORE_SETTINGS_KEY || e.key === 'astStoreSettingsPing'){ renderMap(); }
+});
+cloudWatchSettings('astStoreSettings', function(){ renderMap(); });
+renderMap();
+
+// --- Homepage rotating banner ads (managed live from the owner dashboard) ---
+const AD_BANNER_KEY = 'astBanners';
+let adBanners = [];
+let adIndex = 0;
+let adTimer = null;
+function catNameFor(cat){
+  const t = dict[currentLang];
+  if(cat==='furniture') return t.catFurnitureTitle;
+  if(cat==='electronics') return t.catElecTitle;
+  if(cat==='appliances') return t.catApplTitle;
+  return currentLang === 'hi' ? 'ऑफर' : 'OFFER';
+}
+function loadAdBanners(){
+  try{
+    const all = JSON.parse(localStorage.getItem(AD_BANNER_KEY) || '[]');
+    adBanners = all.filter(b => b.active && b.img);
+  }catch(e){ adBanners = []; }
+}
+function renderAdBanner(){
+  const wrap = document.getElementById('adBannerWrap');
+  const slidesEl = document.getElementById('adSlides');
+  const dotsEl = document.getElementById('adDots');
+  if(!wrap) return;
+  if(!adBanners.length){ wrap.style.display = 'none'; if(adTimer){clearInterval(adTimer); adTimer=null;} return; }
+  wrap.style.display = 'block';
+  if(adIndex >= adBanners.length) adIndex = 0;
+  slidesEl.innerHTML = adBanners.map((b,i) => `
+    <div class="ad-slide ${i===adIndex?'active':''}" data-i="${i}">
+      <img src="${b.img}" alt="">
+      <div class="ad-scrim"></div>
+      <div class="ad-text">
+        <div class="ad-cat">${catNameFor(b.cat)}</div>
+        <div class="ad-title">${(b.title||'').replace(/</g,'&lt;')}</div>
+        ${b.subtext ? `<div class="ad-sub">${b.subtext.replace(/</g,'&lt;')}</div>` : ''}
+        ${b.rate ? `<div class="ad-rate">₹${Number(b.rate).toLocaleString('en-IN')}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+  dotsEl.style.display = adBanners.length > 1 ? 'flex' : 'none';
+  dotsEl.innerHTML = adBanners.map((b,i) => `<button class="ad-dot ${i===adIndex?'active':''}" onclick="goToAd(${i})"></button>`).join('');
+  if(adTimer) clearInterval(adTimer);
+  if(adBanners.length > 1){
+    adTimer = setInterval(() => { adIndex = (adIndex+1) % adBanners.length; renderAdBanner(); }, 4500);
+  }
+}
+function goToAd(i){ adIndex = i; renderAdBanner(); }
+window.addEventListener('storage', function(e){
+  if(e.key === AD_BANNER_KEY || e.key === 'astBannersPing'){
+    loadAdBanners();
+    renderAdBanner();
+  }
+});
+cloudWatchSettings('astBanners', function(){ loadAdBanners(); renderAdBanner(); });
+loadAdBanners();
+renderAdBanner();
+
+applyLang();
+</script>
+</body>
+</html>
